@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\CMakeFiles\c1deb2e17d9fbd4207ee7f8ba98a88d7\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{E9669522-59CA-31DF-8966-9AD24CAE02E3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

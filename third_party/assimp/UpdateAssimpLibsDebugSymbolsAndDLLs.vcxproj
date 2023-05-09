@@ -1,0 +1,473 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{12CF033D-D977-3761-A8E3-F378E843D828}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.22000.0</WindowsTargetPlatformVersion>
+    <Platform>Win32</Platform>
+    <ProjectName>UpdateAssimpLibsDebugSymbolsAndDLLs</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\.;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>							</Message>
+      <Command>setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/code/Release/assimp--mt.dll C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/bin32/assimp--mt.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/code/Release/assimp--mt.exp C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/lib32/assimp--mt.exp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/code/Release/assimp--mt.lib C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/lib32/assimp--mt.lib
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/code/Debug/assimp--mtd.dll C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/bin32/assimp--mtd.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/code/Debug/assimp--mtd.exp C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/lib32/assimp--mtd.exp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/code/Debug/assimp--mtd.ilk C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/lib32/assimp--mtd.ilk
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/code/Debug/assimp--mtd.lib C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/lib32/assimp--mtd.lib
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/code/Debug/assimp--mtd.pdb C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/lib32/assimp--mtd.pdb
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\.;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>							</Message>
+      <Command>setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/code/Release/assimp--mt.dll C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/bin32/assimp--mt.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/code/Release/assimp--mt.exp C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/lib32/assimp--mt.exp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/code/Release/assimp--mt.lib C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/lib32/assimp--mt.lib
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/code/Debug/assimp--mtd.dll C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/bin32/assimp--mtd.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/code/Debug/assimp--mtd.exp C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/lib32/assimp--mtd.exp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/code/Debug/assimp--mtd.ilk C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/lib32/assimp--mtd.ilk
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/code/Debug/assimp--mtd.lib C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/lib32/assimp--mtd.lib
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/code/Debug/assimp--mtd.pdb C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/lib32/assimp--mtd.pdb
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\.;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>							</Message>
+      <Command>setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/code/Release/assimp--mt.dll C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/bin32/assimp--mt.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/code/Release/assimp--mt.exp C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/lib32/assimp--mt.exp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/code/Release/assimp--mt.lib C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/lib32/assimp--mt.lib
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/code/Debug/assimp--mtd.dll C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/bin32/assimp--mtd.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/code/Debug/assimp--mtd.exp C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/lib32/assimp--mtd.exp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/code/Debug/assimp--mtd.ilk C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/lib32/assimp--mtd.ilk
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/code/Debug/assimp--mtd.lib C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/lib32/assimp--mtd.lib
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/code/Debug/assimp--mtd.pdb C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/lib32/assimp--mtd.pdb
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\.;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>							</Message>
+      <Command>setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/code/Release/assimp--mt.dll C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/bin32/assimp--mt.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/code/Release/assimp--mt.exp C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/lib32/assimp--mt.exp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/code/Release/assimp--mt.lib C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/lib32/assimp--mt.lib
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/code/Debug/assimp--mtd.dll C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/bin32/assimp--mtd.dll
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/code/Debug/assimp--mtd.exp C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/lib32/assimp--mtd.exp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/code/Debug/assimp--mtd.ilk C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/lib32/assimp--mtd.ilk
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/code/Debug/assimp--mtd.lib C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/lib32/assimp--mtd.lib
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/code/Debug/assimp--mtd.pdb C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/lib32/assimp--mtd.pdb
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main -BC:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main --check-stamp-file C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Program Files\CMake\share\cmake-3.26\Modules\CMakeParseArguments.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\FindPkgConfig.cmake;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\assimp-config-version.cmake.in;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\assimp-config.cmake.in;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\assimp.pc.in;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\assimpTargets-debug.cmake.in;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\assimpTargets-release.cmake.in;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\assimpTargets.cmake.in;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\cmake-modules\FindDirectX.cmake;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\cmake-modules\FindPkgMacros.cmake;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\cmake-modules\FindZLIB.cmake;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\cmake-modules\PrecompiledHeader.cmake;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\cmake-modules\cmake_uninstall.cmake.in;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\cmake\HunterGate.cmake;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\config.h.in;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\revision.h.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main -BC:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main --check-stamp-file C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Program Files\CMake\share\cmake-3.26\Modules\CMakeParseArguments.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\FindPkgConfig.cmake;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\assimp-config-version.cmake.in;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\assimp-config.cmake.in;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\assimp.pc.in;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\assimpTargets-debug.cmake.in;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\assimpTargets-release.cmake.in;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\assimpTargets.cmake.in;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\cmake-modules\FindDirectX.cmake;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\cmake-modules\FindPkgMacros.cmake;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\cmake-modules\FindZLIB.cmake;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\cmake-modules\PrecompiledHeader.cmake;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\cmake-modules\cmake_uninstall.cmake.in;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\cmake\HunterGate.cmake;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\config.h.in;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\revision.h.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main -BC:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main --check-stamp-file C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Program Files\CMake\share\cmake-3.26\Modules\CMakeParseArguments.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\FindPkgConfig.cmake;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\assimp-config-version.cmake.in;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\assimp-config.cmake.in;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\assimp.pc.in;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\assimpTargets-debug.cmake.in;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\assimpTargets-release.cmake.in;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\assimpTargets.cmake.in;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\cmake-modules\FindDirectX.cmake;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\cmake-modules\FindPkgMacros.cmake;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\cmake-modules\FindZLIB.cmake;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\cmake-modules\PrecompiledHeader.cmake;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\cmake-modules\cmake_uninstall.cmake.in;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\cmake\HunterGate.cmake;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\config.h.in;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\revision.h.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main -BC:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main --check-stamp-file C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Program Files\CMake\share\cmake-3.26\Modules\CMakeParseArguments.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\FindPkgConfig.cmake;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\assimp-config-version.cmake.in;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\assimp-config.cmake.in;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\assimp.pc.in;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\assimpTargets-debug.cmake.in;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\assimpTargets-release.cmake.in;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\assimpTargets.cmake.in;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\cmake-modules\FindDirectX.cmake;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\cmake-modules\FindPkgMacros.cmake;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\cmake-modules\FindZLIB.cmake;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\cmake-modules\PrecompiledHeader.cmake;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\cmake-modules\cmake_uninstall.cmake.in;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\cmake\HunterGate.cmake;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\config.h.in;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\revision.h.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\ZERO_CHECK.vcxproj">
+      <Project>{369EEC64-19CF-37E1-A241-762CFA23206A}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

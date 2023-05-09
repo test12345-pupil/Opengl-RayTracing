@@ -1,0 +1,570 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{2767670D-9AFB-3666-A427-BDA3DD236721}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.22000.0</WindowsTargetPlatformVersion>
+    <Platform>Win32</Platform>
+    <ProjectName>assimp</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\lib\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">assimp.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">assimp-vc141-mtd</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\lib\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">assimp.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">assimp-vc141-mt</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\lib\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">assimp.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">assimp-vc141-mt</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\lib\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">assimp.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">assimp-vc141-mt</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\.;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\zlib;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\rapidjson\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\unzip;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\irrXML;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\openddlparser\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;_DEBUG;EBUG:FULL;WIN32_LEAN_AND_MEAN;UNICODE;_UNICODE;ASSIMP_BUILD_NO_EXPORT;ASSIMP_BUILD_NO_C4D_IMPORTER;MINIZ_USE_UNALIGNED_LOADS_AND_STORES=0;ASSIMP_IMPORTER_GLTF_USE_OPEN3DGC=1;ASSIMP_BUILD_DLL_EXPORT;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;OPENDDLPARSER_BUILD;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Debug\assimp-vc141-mtd.pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;EBUG:FULL;WIN32_LEAN_AND_MEAN;UNICODE;_UNICODE;ASSIMP_BUILD_NO_EXPORT;ASSIMP_BUILD_NO_C4D_IMPORTER;MINIZ_USE_UNALIGNED_LOADS_AND_STORES=0;ASSIMP_IMPORTER_GLTF_USE_OPEN3DGC=1;ASSIMP_BUILD_DLL_EXPORT;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;OPENDDLPARSER_BUILD;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\.;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\zlib;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\rapidjson\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\unzip;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\irrXML;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\openddlparser\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\.;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\zlib;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\rapidjson\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\unzip;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\irrXML;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\openddlparser\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\.;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\zlib;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\rapidjson\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\unzip;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\irrXML;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\openddlparser\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;UNICODE;_UNICODE;ASSIMP_BUILD_NO_EXPORT;ASSIMP_BUILD_NO_C4D_IMPORTER;MINIZ_USE_UNALIGNED_LOADS_AND_STORES=0;ASSIMP_IMPORTER_GLTF_USE_OPEN3DGC=1;ASSIMP_BUILD_DLL_EXPORT;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;OPENDDLPARSER_BUILD;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ProgramDataBaseFileName>C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Release\assimp-vc141-mt.pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;UNICODE;_UNICODE;ASSIMP_BUILD_NO_EXPORT;ASSIMP_BUILD_NO_C4D_IMPORTER;MINIZ_USE_UNALIGNED_LOADS_AND_STORES=0;ASSIMP_IMPORTER_GLTF_USE_OPEN3DGC=1;ASSIMP_BUILD_DLL_EXPORT;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;OPENDDLPARSER_BUILD;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\.;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\zlib;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\rapidjson\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\unzip;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\irrXML;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\openddlparser\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\.;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\zlib;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\rapidjson\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\unzip;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\irrXML;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\openddlparser\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\.;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\zlib;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\rapidjson\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\unzip;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\irrXML;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\openddlparser\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;UNICODE;_UNICODE;ASSIMP_BUILD_NO_EXPORT;ASSIMP_BUILD_NO_C4D_IMPORTER;MINIZ_USE_UNALIGNED_LOADS_AND_STORES=0;ASSIMP_IMPORTER_GLTF_USE_OPEN3DGC=1;ASSIMP_BUILD_DLL_EXPORT;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;OPENDDLPARSER_BUILD;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ProgramDataBaseFileName>C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\MinSizeRel\assimp-vc141-mt.pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;UNICODE;_UNICODE;ASSIMP_BUILD_NO_EXPORT;ASSIMP_BUILD_NO_C4D_IMPORTER;MINIZ_USE_UNALIGNED_LOADS_AND_STORES=0;ASSIMP_IMPORTER_GLTF_USE_OPEN3DGC=1;ASSIMP_BUILD_DLL_EXPORT;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;OPENDDLPARSER_BUILD;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\.;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\zlib;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\rapidjson\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\unzip;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\irrXML;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\openddlparser\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\.;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\zlib;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\rapidjson\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\unzip;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\irrXML;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\openddlparser\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\.;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\zlib;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\rapidjson\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\unzip;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\irrXML;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\openddlparser\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;UNICODE;_UNICODE;ASSIMP_BUILD_NO_EXPORT;ASSIMP_BUILD_NO_C4D_IMPORTER;MINIZ_USE_UNALIGNED_LOADS_AND_STORES=0;ASSIMP_IMPORTER_GLTF_USE_OPEN3DGC=1;ASSIMP_BUILD_DLL_EXPORT;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;OPENDDLPARSER_BUILD;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\RelWithDebInfo\assimp-vc141-mt.pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;UNICODE;_UNICODE;ASSIMP_BUILD_NO_EXPORT;ASSIMP_BUILD_NO_C4D_IMPORTER;MINIZ_USE_UNALIGNED_LOADS_AND_STORES=0;ASSIMP_IMPORTER_GLTF_USE_OPEN3DGC=1;ASSIMP_BUILD_DLL_EXPORT;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;OPENDDLPARSER_BUILD;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\.;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\zlib;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\rapidjson\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\unzip;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\irrXML;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\openddlparser\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\.;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\zlib;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\rapidjson\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\unzip;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\irrXML;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\contrib\openddlparser\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..\include;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/code/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main -BC:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main --check-stamp-file C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/code/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Program Files\CMake\share\cmake-3.26\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\FindPackageMessage.cmake;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\cmake-modules\FindRT.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/code/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main -BC:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main --check-stamp-file C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/code/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Program Files\CMake\share\cmake-3.26\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\FindPackageMessage.cmake;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\cmake-modules\FindRT.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/code/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main -BC:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main --check-stamp-file C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/code/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Program Files\CMake\share\cmake-3.26\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\FindPackageMessage.cmake;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\cmake-modules\FindRT.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/code/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main -BC:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main --check-stamp-file C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/code/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Program Files\CMake\share\cmake-3.26\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\FindPackageMessage.cmake;C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\cmake-modules\FindRT.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\Assimp.cpp" />
+    <ResourceCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\res\assimp.rc" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\CApi\CInterfaceIOWrapper.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\CApi\CInterfaceIOWrapper.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\BaseImporter.cpp" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\BaseProcess.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\BaseProcess.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\Importer.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\ScenePrivate.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\PostStepRegistry.cpp" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\ImporterRegistry.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\DefaultProgressHandler.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\DefaultIOStream.cpp" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\DefaultIOSystem.cpp" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\ZipArchiveIOSystem.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\PolyTools.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\Importer.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\IFF.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\SGSpatialSort.cpp" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\VertexTriangleAdjacency.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\VertexTriangleAdjacency.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\SpatialSort.cpp" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\SceneCombiner.cpp" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\ScenePreprocessor.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\ScenePreprocessor.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\SkeletonMeshBuilder.cpp" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\SplitByBoneCountProcess.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\SplitByBoneCountProcess.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\StandardShapes.cpp" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\TargetAnimation.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\TargetAnimation.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\RemoveComments.cpp" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\Subdivision.cpp" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\scene.cpp" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\Bitmap.cpp" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\Version.cpp" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\CreateAnimMesh.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\simd.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\simd.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\DefaultLogger.hpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\LogStream.hpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\Logger.hpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\NullLogger.hpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\Win32DebugLogStream.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\DefaultLogger.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\FileLogStream.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Common\StdOStreamLogStream.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\CalcTangentsProcess.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\CalcTangentsProcess.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\ComputeUVMappingProcess.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\ComputeUVMappingProcess.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\ConvertToLHProcess.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\ConvertToLHProcess.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\EmbedTexturesProcess.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\EmbedTexturesProcess.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\FindDegenerates.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\FindDegenerates.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\FindInstancesProcess.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\FindInstancesProcess.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\FindInvalidDataProcess.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\FindInvalidDataProcess.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\FixNormalsStep.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\FixNormalsStep.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\DropFaceNormalsProcess.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\DropFaceNormalsProcess.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\GenFaceNormalsProcess.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\GenFaceNormalsProcess.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\GenVertexNormalsProcess.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\GenVertexNormalsProcess.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\PretransformVertices.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\PretransformVertices.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\ImproveCacheLocality.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\ImproveCacheLocality.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\JoinVerticesProcess.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\JoinVerticesProcess.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\LimitBoneWeightsProcess.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\LimitBoneWeightsProcess.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\RemoveRedundantMaterials.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\RemoveRedundantMaterials.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\RemoveVCProcess.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\RemoveVCProcess.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\SortByPTypeProcess.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\SortByPTypeProcess.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\SplitLargeMeshes.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\SplitLargeMeshes.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\TextureTransform.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\TextureTransform.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\TriangulateProcess.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\TriangulateProcess.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\ValidateDataStructure.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\ValidateDataStructure.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\OptimizeGraph.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\OptimizeGraph.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\OptimizeMeshes.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\OptimizeMeshes.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\DeboneProcess.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\DeboneProcess.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\ProcessHelper.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\ProcessHelper.cpp" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\MakeVerboseFormat.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\MakeVerboseFormat.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\ScaleProcess.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\ScaleProcess.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\GenBoundingBoxesProcess.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\PostProcessing\GenBoundingBoxesProcess.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Material\MaterialSystem.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Material\MaterialSystem.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Importer\STEPParser\STEPFileReader.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Importer\STEPParser\STEPFileReader.cpp" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Importer\STEPParser\STEPFileEncoding.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\Importer\STEPParser\STEPFileEncoding.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\FBX\FBXImporter.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\FBX\FBXCompileConfig.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\FBX\FBXImporter.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\FBX\FBXParser.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\FBX\FBXParser.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\FBX\FBXTokenizer.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\FBX\FBXTokenizer.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\FBX\FBXImportSettings.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\FBX\FBXConverter.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\FBX\FBXConverter.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\FBX\FBXUtil.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\FBX\FBXUtil.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\FBX\FBXDocument.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\FBX\FBXDocument.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\FBX\FBXProperties.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\FBX\FBXProperties.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\FBX\FBXMeshGeometry.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\FBX\FBXMeshGeometry.cpp" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\FBX\FBXMaterial.cpp" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\FBX\FBXModel.cpp" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\FBX\FBXAnimation.cpp" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\FBX\FBXNodeAttribute.cpp" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\FBX\FBXDeformer.cpp" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\FBX\FBXBinaryTokenizer.cpp" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\FBX\FBXDocumentUtil.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\code\FBX\FBXCommon.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\irrXMLWrapper.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\unzip\crypt.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\unzip\ioapi.c" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\unzip\ioapi.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\unzip\unzip.c" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\unzip\unzip.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\poly2tri\poly2tri\common\shapes.cc" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\poly2tri\poly2tri\common\shapes.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\poly2tri\poly2tri\common\utils.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\poly2tri\poly2tri\sweep\advancing_front.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\poly2tri\poly2tri\sweep\advancing_front.cc" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\poly2tri\poly2tri\sweep\cdt.cc" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\poly2tri\poly2tri\sweep\cdt.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\poly2tri\poly2tri\sweep\sweep.cc" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\poly2tri\poly2tri\sweep\sweep.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\poly2tri\poly2tri\sweep\sweep_context.cc" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\poly2tri\poly2tri\sweep\sweep_context.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\clipper\clipper.hpp" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\clipper\clipper.cpp" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\openddlparser\code\OpenDDLParser.cpp" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\openddlparser\code\DDLNode.cpp" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\openddlparser\code\OpenDDLCommon.cpp" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\openddlparser\code\OpenDDLExport.cpp" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\openddlparser\code\Value.cpp" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\openddlparser\code\OpenDDLStream.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\openddlparser\include\openddlparser\OpenDDLParser.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\openddlparser\include\openddlparser\OpenDDLParserUtils.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\openddlparser\include\openddlparser\OpenDDLCommon.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\openddlparser\include\openddlparser\OpenDDLExport.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\openddlparser\include\openddlparser\OpenDDLStream.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\openddlparser\include\openddlparser\DDLNode.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\openddlparser\include\openddlparser\Value.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\Open3DGC\o3dgcAdjacencyInfo.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\Open3DGC\o3dgcArithmeticCodec.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\Open3DGC\o3dgcArithmeticCodec.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\Open3DGC\o3dgcBinaryStream.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\Open3DGC\o3dgcCommon.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\Open3DGC\o3dgcDVEncodeParams.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\Open3DGC\o3dgcDynamicVectorDecoder.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\Open3DGC\o3dgcDynamicVectorDecoder.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\Open3DGC\o3dgcDynamicVectorEncoder.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\Open3DGC\o3dgcDynamicVectorEncoder.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\Open3DGC\o3dgcDynamicVector.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\Open3DGC\o3dgcFIFO.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\Open3DGC\o3dgcIndexedFaceSet.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\Open3DGC\o3dgcIndexedFaceSet.inl" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\Open3DGC\o3dgcSC3DMCDecoder.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\Open3DGC\o3dgcSC3DMCDecoder.inl" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\Open3DGC\o3dgcSC3DMCEncodeParams.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\Open3DGC\o3dgcSC3DMCEncoder.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\Open3DGC\o3dgcSC3DMCEncoder.inl" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\Open3DGC\o3dgcTimer.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\Open3DGC\o3dgcTools.cpp" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\Open3DGC\o3dgcTriangleFans.cpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\Open3DGC\o3dgcTriangleFans.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\Open3DGC\o3dgcTriangleListDecoder.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\Open3DGC\o3dgcTriangleListDecoder.inl" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\Open3DGC\o3dgcTriangleListEncoder.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\Open3DGC\o3dgcTriangleListEncoder.inl" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\Open3DGC\o3dgcVector.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\Open3DGC\o3dgcVector.inl" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\zip\src\miniz.h" />
+    <ClCompile Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\zip\src\zip.c" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\zip\src\zip.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\anim.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\aabb.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\ai_assert.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\camera.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\color4.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\color4.inl" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\config.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\defs.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\Defines.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\cfileio.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\light.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\material.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\material.inl" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\matrix3x3.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\matrix3x3.inl" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\matrix4x4.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\matrix4x4.inl" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\mesh.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\pbrmaterial.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\postprocess.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\quaternion.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\quaternion.inl" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\scene.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\metadata.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\texture.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\types.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\vector2.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\vector2.inl" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\vector3.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\vector3.inl" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\version.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\cimport.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\importerdesc.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\Importer.hpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\ProgressHandler.hpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\IOStream.hpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\IOSystem.hpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\cexport.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\Exporter.hpp" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\DefaultIOStream.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\DefaultIOSystem.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\ZipArchiveIOSystem.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\SceneCombiner.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\fast_atof.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\qnan.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\BaseImporter.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\Hash.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\MemoryIOWrapper.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\ParsingUtils.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\StreamReader.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\StreamWriter.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\StringComparison.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\StringUtils.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\SGSpatialSort.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\GenericProperty.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\SpatialSort.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\SkeletonMeshBuilder.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\SmoothingGroups.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\SmoothingGroups.inl" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\StandardShapes.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\RemoveComments.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\Subdivision.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\Vertex.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\LineSplitter.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\TinyFormatter.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\Profiler.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\LogAux.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\Bitmap.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\XMLTools.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\IOStreamBuffer.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\CreateAnimMesh.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\BlobIOSystem.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\MathFunctions.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\Macros.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\Exceptional.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\ByteSwapper.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\Compiler\pushpack1.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\Compiler\poppack1.h" />
+    <ClInclude Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\include\assimp\Compiler\pstdint.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\ZERO_CHECK.vcxproj">
+      <Project>{369EEC64-19CF-37E1-A241-762CFA23206A}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\irrXML\IrrXML.vcxproj">
+      <Project>{DC629B32-0D4F-38CF-9F39-E99F8C1DEBF1}</Project>
+      <Name>IrrXML</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\third_party\assimp\contrib\zlib\zlibstatic.vcxproj">
+      <Project>{DF1A7266-71D6-35B0-B4A9-FB83FF878F48}</Project>
+      <Name>zlibstatic</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

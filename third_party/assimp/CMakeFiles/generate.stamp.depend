@@ -1,0 +1,24 @@
+# CMake generation dependency list for this directory.
+C:/Program Files/CMake/share/cmake-3.26/Modules/CMakeParseArguments.cmake
+C:/Program Files/CMake/share/cmake-3.26/Modules/CheckFunctionExists.cmake
+C:/Program Files/CMake/share/cmake-3.26/Modules/CheckIncludeFile.cmake
+C:/Program Files/CMake/share/cmake-3.26/Modules/CheckIncludeFileCXX.cmake
+C:/Program Files/CMake/share/cmake-3.26/Modules/CheckTypeSize.cmake
+C:/Program Files/CMake/share/cmake-3.26/Modules/FindPackageHandleStandardArgs.cmake
+C:/Program Files/CMake/share/cmake-3.26/Modules/FindPackageMessage.cmake
+C:/Program Files/CMake/share/cmake-3.26/Modules/FindPkgConfig.cmake
+C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/CMakeLists.txt
+C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/assimp-config-version.cmake.in
+C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/assimp-config.cmake.in
+C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/assimp.pc.in
+C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/assimpTargets-debug.cmake.in
+C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/assimpTargets-release.cmake.in
+C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/assimpTargets.cmake.in
+C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/cmake-modules/FindDirectX.cmake
+C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/cmake-modules/FindPkgMacros.cmake
+C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/cmake-modules/FindZLIB.cmake
+C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/cmake-modules/PrecompiledHeader.cmake
+C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/cmake-modules/cmake_uninstall.cmake.in
+C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/cmake/HunterGate.cmake
+C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/include/assimp/config.h.in
+C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/third_party/assimp/revision.h.in

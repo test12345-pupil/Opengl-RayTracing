@@ -1,0 +1,4 @@
+﻿  main.cpp
+  LINK : 没有找到 C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\src\Debug\Hand.exe 或上一个增量链接没有生成它；正在执行完全链接
+    正在创建库 C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/src/Debug/Hand.lib 和对象 C:/Users/xzz/Documents/pku/2023spring/CG/hw1/hand-graphics-homework-main/src/Debug/Hand.exp
+  Hand.vcxproj -> C:\Users\xzz\Documents\pku\2023spring\CG\hw1\hand-graphics-homework-main\src\Debug\Hand.exe
