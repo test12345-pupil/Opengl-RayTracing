@@ -9,6 +9,9 @@
 #include "triangle.h"
 #include "sphere.h"
 
+#include "texture_image.h"
+#include "objloader.h"
+
 const int WIDTH = 512, HEIGHT = 512;
 const float C = 25;
 glm::fvec3 screen[HEIGHT][WIDTH];
@@ -31,6 +34,9 @@ const glm::fvec3 COL_RED(1, 0.5, 0.5),
 	COL_MAGENTA(1.0, 0.1, 1.0),
 	COL_GRAY(0.5, 0.5, 0.5),
 	COL_WHITE(1, 1, 1);
+
+	
+const TextureImage::Texture *texture;
 
 
 int main(void) {
@@ -75,38 +81,14 @@ int main(void) {
 	scene.addShape(new Triangle(glm::fvec3(1, -1, 1), glm::fvec3(-1, 1, 1), glm::fvec3(-1, -1, 1), COL_GRAY));
 	scene.addShape(new Triangle(glm::fvec3(1, -1, 1), glm::fvec3(1, 1, 1), glm::fvec3(-1, 1, 1), COL_GRAY));
 
+	
+	texture = &TextureImage::Texture::loadTexture("aranara_image", "aranara_image.png");
 
 	{
-		Sphere*sphere = new Sphere(glm::fvec3(0.7, -0.7, -0.5), 0.2, COL_RED);
-		sphere->material.reflectRate = 0.2;
-		sphere->material.reflectRough = 0.1;
-		sphere->material.refractRate = 0.3;
-		sphere->material.refractRough = 0.1;
-		sphere->material.refractAngle = 1.0;
-		scene.addShape(sphere);
+		loadOBJ("../../data/aranara.obj", &scene, 0, {-0.6, -0.6, -0.6}, {0.6, 0.6, 0.6});
 	}
 
-	{
-		Sphere*sphere = new Sphere(glm::fvec3(0.3, -0.7, -0.6), 0.3, COL_BLUE);
-		sphere->material.reflectRate = 0.9;
-		sphere->material.reflectRough = 0;
-		sphere->material.refractRate = 0;
-		scene.addShape(sphere);
-	}
-
-	{
-		Sphere*sphere = new Sphere(glm::fvec3(-0.3, -0.7, -0.5), 0.2, COL_CYAN);
-		sphere->material.reflectRate = 0;
-		sphere->material.reflectRough = 0.9;
-		sphere->material.refractRate = 0.9;
-		sphere->material.refractAngle = 1;
-		scene.addShape(sphere);
-	}
-
-	{
-		Sphere*sphere = new Sphere(glm::fvec3(-0.7, -0.7, -0.5), 0.2, COL_YELLOW);
-		scene.addShape(sphere);
-	}
+	scene.root = scene.buildBVH({});
 
     GLFWwindow* window;
  
@@ -125,7 +107,9 @@ int main(void) {
     glfwSwapInterval(0);
 
 
-	const int SAMPLE_PER_FRAME = 1;
+	const int SAMPLE_PER_FRAME = 1, D = 5;
+
+	int k = 0;
 	
 	int nsamples = 0;
 
@@ -145,16 +129,18 @@ int main(void) {
 		}
 
 		
-		omp_set_num_threads(64); // 线程个数
+		omp_set_num_threads(16); // 线程个数
 		#pragma omp parallel for
 
-		for(int i=0; i<HEIGHT; ++i){
-			for(int j=0; j<WIDTH; ++j){
+		for(int i=k % D; i<HEIGHT; i += D){
+			for(int j=k / D % D; j<WIDTH; j += D){
 				for(int id=0; id<SAMPLE_PER_FRAME; ++id){
 					screen[i][j]+=scene.sampleOnce(1.0*i/HEIGHT + randf(0, 1.0/HEIGHT), 1.0*j/WIDTH + randf(0, 1.0/WIDTH));
 				}
 			}
 		}
+		++k;
+		
 		nsamples += SAMPLE_PER_FRAME;
 
 		glClearColor (0.0, 0.0, 0.0, 0.0); 
@@ -170,7 +156,7 @@ int main(void) {
 
 		for(int i=0; i<HEIGHT; ++i){
 			for(int j=0; j<WIDTH; ++j){
-				drawPixel(i, j, screen[i][j].x / nsamples, screen[i][j].y / nsamples, screen[i][j].z / nsamples);
+				drawPixel(i, j, screen[i][j].x / nsamples * D * D, screen[i][j].y / nsamples * D * D, screen[i][j].z / nsamples * D * D);
 			}
 		}
 	

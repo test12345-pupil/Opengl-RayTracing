@@ -7,29 +7,92 @@
 #include "camera.h"
 #include <cmath>
 #include "randomtools.h"
+#include "BVHnode.h"
+#include "triangle.h"
+
+const int BVH_TREE_SIZE = 20000;
 
 struct Scene{
-    std::vector<Shape*>shapes;
+    std::vector<Triangle*>shapes; 
+    
+    BVHnode t[BVH_TREE_SIZE];
+    int BVH_id = 0, root = 0;
+
 	Camera cam;
 
     float alphaH, alphaW;
     float tg_alphaH, tg_alphaW;
 
-    void addShape(Shape *p){
+    void addShape(Triangle *p){
+        assert(root == 0);
         shapes.push_back(p);
     }
 
-    glm::vec3 RayTrace(Ray r, int depth = 0){
-        const static float RAYTRACE_DIE_PROB = 0.1;
-
-        HitResult result;
-        for(Shape *s : shapes){
-            HitResult res = s->getHitResult(r);
-            if((!std::isnan(res.distance) && res.distance > 1e-4) &&
-               (std::isnan(result.distance) || res.distance < result.distance)){
-                    result = res;
-                }
+    int buildBVH(std::vector<Triangle*> shapes = {}){
+        if(shapes.empty()) shapes = this -> shapes;
+        int x = ++BVH_id;
+        if(shapes.size() == 1){
+            t[x].isleaf = true;
+            memcpy(&t[x].leaf, shapes[0], sizeof(Triangle));
+            return x;
         }
+        t[x].isleaf = false;
+        int axis;
+        auto cmp_axis = [&](Triangle *x, Triangle *y){
+            return (x->a[axis] + x->b[axis] + x->c[axis]) < (y->a[axis] + y->b[axis] + y->c[axis]);
+        };
+
+        float minW = INFINITY, bestAxis = -1, mid = -1;
+
+        AABB &box = t[x].AABBbox;
+        for(axis = 0; axis < 3; ++axis){
+            std::sort(shapes.begin(), shapes.end(), cmp_axis);
+            std::vector<AABB> pre(shapes.size()), suf(shapes.size());
+            for(int i=0; i<shapes.size(); ++i){
+                pre[i] = shapes[i]->getAABBbox();
+                suf[i] = shapes[shapes.size()-1-i]->getAABBbox();
+                if(i>0){
+                    pre[i] = combine(pre[i], pre[i-1]);
+                    suf[i] = combine(suf[i], suf[i-1]);
+                }
+            }
+            for(int i=1; i<shapes.size(); ++i){
+                float cost = i * pre[i-1].getSurface() + (shapes.size()-i) * suf[shapes.size()-1-i].getSurface();
+                if(cost < minW){
+                    minW = cost;
+                    bestAxis = axis;
+                    mid = i;
+                }
+            }
+            t[x].AABBbox = pre.back();
+        }
+
+
+        assert(bestAxis >= 0);
+
+        axis = bestAxis;
+        std::sort(shapes.begin(), shapes.end(), cmp_axis);
+        t[x].ls = buildBVH({shapes.begin(), shapes.begin() + mid});
+        t[x].rs = buildBVH({shapes.begin() + mid, shapes.end()});
+        return x;
+    }
+
+    HitResult getBVHHitResult(int x, Ray r){
+        if(t[x].isleaf){
+            return t[x].leaf.getHitResult(r);
+        }
+        if(!t[x].AABBbox.testInsect(r)) return {};
+        HitResult L = getBVHHitResult(t[x].ls, r),
+            R = getBVHHitResult(t[x].rs, r);
+        if(std::isnan(L.distance) || L.distance > R.distance) return R;
+        else return L;
+    }
+
+    glm::vec3 RayTrace(Ray r, int depth = 0){
+        const static float RAYTRACE_DIE_PROB = 0.2;
+        if(depth == 8) return glm::vec3(0);
+
+        HitResult result = getBVHHitResult(root, r);
         if(std::isnan(result.distance)) return {0,0,0};
         if(result.material.isLighter) return result.material.Color;
         if(randf() < RAYTRACE_DIE_PROB) return {0,0,0};

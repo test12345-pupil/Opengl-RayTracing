@@ -6,7 +6,7 @@
 // 记录光线与场景的交点
 struct HitResult{
     double distance; // 与交点距离，若为nan则无效
-    glm::vec3 hitPoint; // 光线命中点
+    glm::fvec3 hitPoint; // 光线命中点
     Material material; // 命中点的材质
     HitResult(){
         distance = NAN;
