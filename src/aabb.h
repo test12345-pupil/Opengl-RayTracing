@@ -4,6 +4,7 @@
 #include "gl_env.h"
 #include <cmath>
 #include "ray.h"
+#include <algorithm>
 
 struct AABB{
     glm::fvec3 d, u;
@@ -13,6 +14,12 @@ struct AABB{
     float getSurface() const {
         glm::fvec3 len = u-d;
         return len.x*len.y+len.x*len.z+len.y*len.z;
+    }
+    static glm::fvec3 _min(glm::fvec3 a, glm::fvec3 b){
+        return {std::min({a.x, b.x}), std::min({a.y, b.y}), std::min({a.z, b.z})};
+    }
+    static glm::fvec3 _max(glm::fvec3 a, glm::fvec3 b){
+        return {std::max({a.x, b.x}), std::max({a.y, b.y}), std::max({a.z, b.z})};
     }
     bool testInsect(const Ray r) const {
         glm::fvec3 idir = glm::fvec3(1.0 / r.direction.x, 1.0 / r.direction.y, 1.0 / r.direction.z);

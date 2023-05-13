@@ -53,6 +53,9 @@ bool loadOBJ(const char * path, Scene *s, int sceneid, glm::fvec3 d, glm::fvec3 
 			
 			if(parsing){
 				parsing = false;
+
+				if(temp_uvs.empty())temp_uvs.resize(1);
+
 				glm::fvec3 _u(-INFINITY), _d(INFINITY);
 				for(int i=0; i<temp_vertices.size(); ++i){
 					for(int j=0; j<3; ++j){
@@ -65,15 +68,19 @@ bool loadOBJ(const char * path, Scene *s, int sceneid, glm::fvec3 d, glm::fvec3 
 				glm::fvec3 b = ((u - d) - (_u - _d) * scale) * 0.5f; 
 				for(int i=0; i<temp_vertices.size(); ++i){
 					temp_vertices[i] = (temp_vertices[i] - _d) * scale + d + b;
+					for(int j=0; j<3; ++j)
+						assert(d[j] <= temp_vertices[i][j] && temp_vertices[i][j] <= u[j]);
 				}
 			}
-			
+
 			std::string vertex1, vertex2, vertex3;
             static const int MAX_VERTEX_PER_POLYGON = 10;
-			unsigned int vertex[MAX_VERTEX_PER_POLYGON + 1], uv[MAX_VERTEX_PER_POLYGON + 1], normal[MAX_VERTEX_PER_POLYGON + 1];
+			unsigned int vertex[MAX_VERTEX_PER_POLYGON + 1], uv[MAX_VERTEX_PER_POLYGON + 1]={0}, normal[MAX_VERTEX_PER_POLYGON + 1];
+			for(int i=0; i<MAX_VERTEX_PER_POLYGON; ++i)vertex[i] = uv[i] = normal[i] = 1;
             int n = 0;
 			while(1){
                 int num = fscanf(file, "%d/%d/%d", &vertex[n], &uv[n], &normal[n]);
+                // int num = fscanf(file, "%d", &vertex[n]);
                 if (num == 0){
                     printf("Parse failed 1\n");
                     fclose(file);
@@ -102,9 +109,9 @@ bool loadOBJ(const char * path, Scene *s, int sceneid, glm::fvec3 d, glm::fvec3 
 			}
             for(int i=1; i+1<n; ++i){
 				s -> addShape(
-					new Triangle(temp_vertices[vertex[0]], temp_vertices[vertex[i]], temp_vertices[vertex[i+1]],
-						temp_uvs[uv[0]], temp_uvs[uv[i]], temp_uvs[uv[i+1]],
-						(1.0f/3) * (temp_normals[normal[0]] + temp_normals[normal[i]] + temp_normals[normal[i+1]]),
+					new Triangle(temp_vertices[vertex[0]-1], temp_vertices[vertex[i]-1], temp_vertices[vertex[i+1]-1],
+						temp_uvs[uv[0]-1], temp_uvs[uv[i]-1], temp_uvs[uv[i+1]-1],
+						glm::fvec3(0.0),//(1.0f/3) * (temp_normals[normal[0]] + temp_normals[normal[i]] + temp_normals[normal[i+1]]),
 						sceneid));
             }
 		}else{

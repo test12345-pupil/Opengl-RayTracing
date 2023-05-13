@@ -41,8 +41,8 @@ struct Triangle: public Shape{
             material);
         res.material.normal = N;
         if(texture_number != -1){
-            res.material.Color = 0.25f * (res.hitPoint + glm::fvec3(1)) ;
-            // texture -> data
+            res.material.Color = 0.75f * (res.hitPoint + glm::fvec3(1)) ;
+            // TODO：需要找到texture对应的像素
         }else{
             // do nothing;
         }

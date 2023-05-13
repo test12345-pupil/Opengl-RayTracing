@@ -42,7 +42,7 @@ struct Scene{
             return (x->a[axis] + x->b[axis] + x->c[axis]) < (y->a[axis] + y->b[axis] + y->c[axis]);
         };
 
-        float minW = INFINITY, bestAxis = -1, mid = -1;
+        float minW = INFINITY;int bestAxis = -1,mid = -1;
 
         AABB &box = t[x].AABBbox;
         for(axis = 0; axis < 3; ++axis){
@@ -77,6 +77,7 @@ struct Scene{
         return x;
     }
 
+
     HitResult getBVHHitResult(int x, Ray r){
         if(t[x].isleaf){
             return t[x].leaf.getHitResult(r);
@@ -90,7 +91,7 @@ struct Scene{
 
     glm::vec3 RayTrace(Ray r, int depth = 0){
         const static float RAYTRACE_DIE_PROB = 0.2;
-        if(depth == 8) return glm::vec3(0);
+        if(depth == 10) return glm::vec3(0);
 
         HitResult result = getBVHHitResult(root, r);
         if(std::isnan(result.distance)) return {0,0,0};

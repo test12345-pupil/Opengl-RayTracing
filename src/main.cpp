@@ -82,10 +82,14 @@ int main(void) {
 	scene.addShape(new Triangle(glm::fvec3(1, -1, 1), glm::fvec3(1, 1, 1), glm::fvec3(-1, 1, 1), COL_GRAY));
 
 	
-	texture = &TextureImage::Texture::loadTexture("aranara_image", "aranara_image.png");
+	// texture = &TextureImage::Texture::loadTexture("aranara_image", "aranara_image.png");
 
 	{
-		loadOBJ("../../data/aranara.obj", &scene, 0, {-0.6, -0.6, -0.6}, {0.6, 0.6, 0.6});
+		bool success = loadOBJ("../../data/aranara.obj", &scene, 0, {-0.5, -0.5, -0.5}, {0.5, 0.5, 0.5});
+		
+		// bool success = loadOBJ("../../data/bunny.obj", &scene, 0, {-0.5, -0.5, -0.5}, {0.5, 0.5, 0.5});
+
+		assert(success);
 	}
 
 	scene.root = scene.buildBVH({});
@@ -95,7 +99,7 @@ int main(void) {
     if (!glfwInit()) return -1;
  
 
-    window = glfwCreateWindow(WIDTH, HEIGHT, "Path Tracing Result", NULL, NULL);
+    window = glfwCreateWindow(WIDTH, HEIGHT, "New window", NULL, NULL);
     if (!window) {
         glfwTerminate();
         return -1;
@@ -107,11 +111,14 @@ int main(void) {
     glfwSwapInterval(0);
 
 
-	const int SAMPLE_PER_FRAME = 1, D = 5;
+	const int SAMPLE_PER_FRAME = 1, D = 3;
 
 	int k = 0;
 	
 	int nsamples = 0;
+
+	printf("Press Enter to start rendering\n");
+	getchar();
 
     while (!glfwWindowShouldClose(window)) {
         static float passed_time = 0, passed_time_last, delta_time;
@@ -128,9 +135,9 @@ int main(void) {
 			memset(screen, 0, sizeof screen);
 		}
 
-		
 		omp_set_num_threads(16); // 线程个数
 		#pragma omp parallel for
+
 
 		for(int i=k % D; i<HEIGHT; i += D){
 			for(int j=k / D % D; j<WIDTH; j += D){
@@ -139,6 +146,7 @@ int main(void) {
 				}
 			}
 		}
+
 		++k;
 		
 		nsamples += SAMPLE_PER_FRAME;
