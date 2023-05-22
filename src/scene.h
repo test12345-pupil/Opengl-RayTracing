@@ -13,10 +13,9 @@
 const int BVH_TREE_SIZE = 20000;
 
 struct Scene{
-    std::vector<Triangle*>shapes; 
-    
     BVHnode t[BVH_TREE_SIZE];
-    int BVH_id = 0, root = 0;
+    Triangle triangle[BVH_TREE_SIZE];
+    int BVH_id = 0, root = 0, triangle_id = 0;
 
 	Camera cam;
 
@@ -25,20 +24,23 @@ struct Scene{
 
     void addShape(Triangle *p){
         assert(root == 0);
-        shapes.push_back(p);
+        triangle[triangle_id++] = *p;
     }
 
-    int buildBVH(std::vector<Triangle*> shapes = {}){
-        if(shapes.empty()) shapes = this -> shapes;
+    int buildBVH(std::vector<int> shapes = {}){
+        if(shapes.empty()){
+            shapes.resize(triangle_id);
+            for(int i=0; i<shapes.size(); ++i)shapes[i]=i;
+        }
         int x = ++BVH_id;
         if(shapes.size() == 1){
-            t[x].isleaf = true;
-            memcpy(&t[x].leaf, shapes[0], sizeof(Triangle));
+            t[x].triangleID = shapes[0];
             return x;
         }
-        t[x].isleaf = false;
+        t[x].triangleID = -1;
         int axis;
-        auto cmp_axis = [&](Triangle *x, Triangle *y){
+        auto cmp_axis = [&](int _x,int _y){
+            Triangle *x = &triangle[_x], *y = &triangle[_y];
             return (x->a[axis] + x->b[axis] + x->c[axis]) < (y->a[axis] + y->b[axis] + y->c[axis]);
         };
 
@@ -49,8 +51,8 @@ struct Scene{
             std::sort(shapes.begin(), shapes.end(), cmp_axis);
             std::vector<AABB> pre(shapes.size()), suf(shapes.size());
             for(int i=0; i<shapes.size(); ++i){
-                pre[i] = shapes[i]->getAABBbox();
-                suf[i] = shapes[shapes.size()-1-i]->getAABBbox();
+                pre[i] = triangle[shapes[i]].getAABBbox();
+                suf[i] = triangle[shapes[shapes.size()-1-i]].getAABBbox();
                 if(i>0){
                     pre[i] = combine(pre[i], pre[i-1]);
                     suf[i] = combine(suf[i], suf[i-1]);
@@ -79,8 +81,8 @@ struct Scene{
 
 
     HitResult getBVHHitResult(int x, Ray r){
-        if(t[x].isleaf){
-            return t[x].leaf.getHitResult(r);
+        if(t[x].triangleID >= 0){
+            return triangle[t[x].triangleID].getHitResult(r);
         }
         if(!t[x].AABBbox.testInsect(r)) return {};
         HitResult L = getBVHHitResult(t[x].ls, r),
@@ -95,7 +97,7 @@ struct Scene{
 
         HitResult result = getBVHHitResult(root, r);
         if(std::isnan(result.distance)) return {0,0,0};
-        if(result.material.isLighter) return result.material.Color;
+        if(result.material.isLighter == 1) return result.material.Color;
         if(randf() < RAYTRACE_DIE_PROB) return {0,0,0};
         float _r = randf(), C = abs(glm::dot(-r.direction, result.material.normal)) / (1-RAYTRACE_DIE_PROB);
         glm::fvec3 dir = randomDirection(result.material.normal);

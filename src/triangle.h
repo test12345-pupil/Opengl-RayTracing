@@ -9,7 +9,7 @@ struct Triangle: public Shape{
     public:
     glm::fvec3 a,b,c;
     glm::fvec2 ta,tb,tc;
-    GLint texture_number;
+    
     Triangle(){}
     Triangle(glm::fvec3 a, glm::fvec3 b, glm::fvec3 c, 
         glm::fvec2 ta, glm::fvec2 tb, glm::fvec2 tc, 
@@ -17,13 +17,12 @@ struct Triangle: public Shape{
         a(a), b(b), c(c), ta(ta), tb(tb), tc(tc){
         material.normal = glm::normalize(glm::cross(b - a, c - a));
         // material.normal = n;
-        texture_number = tex;
     }
     Triangle(glm::fvec3 a, glm::fvec3 b, glm::fvec3 c, 
         glm::fvec3 color):a(a), b(b), c(c){
         material.normal = glm::normalize(glm::cross(b - a, c - a));
         material.Color = color;
-        texture_number = -1;
+        ta.x = NAN;
     }
     HitResult getHitResult(Ray r){
         glm::fvec3 D = r.direction, N = material.normal;
@@ -40,11 +39,8 @@ struct Triangle: public Shape{
             X,
             material);
         res.material.normal = N;
-        if(texture_number != -1){
+        if(!std::isnan(ta.x)){
             res.material.Color = 0.75f * (res.hitPoint + glm::fvec3(1)) ;
-            // TODO：需要找到texture对应的像素
-        }else{
-            // do nothing;
         }
         return res;
     }
