@@ -41,23 +41,23 @@ struct Camera{
     glm::mat4 get_view() const {
         return glm::lookAt(position, position + direction, up);
     }
-    glm::fvec3 getAxisX(){
+    const glm::fvec3& getAxisX(){
         if(axis_available) return axisX;
         recalculateAxis();
         return axisX;
     }
-    glm::fvec3 getAxisY(){
+    const glm::fvec3& getAxisY(){
         if(axis_available) return axisY;
         recalculateAxis();
         return axisY;
     }
-    glm::fvec3 getUp() const {
+    const glm::fvec3& getUp() const {
         return up;
     }
-    glm::fvec3 getDir() const {
+    const glm::fvec3& getDir() const {
         return direction;
     }
-    glm::fvec3 getPos() const {
+    const glm::fvec3& getPos() const {
         return position;
     }
     void handle_dir(float dx, float dy){ 

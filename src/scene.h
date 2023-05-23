@@ -82,7 +82,7 @@ struct Scene{
 
     HitResult getBVHHitResult(int x, Ray r){
         if(t[x].triangleID >= 0){
-            return triangle[t[x].triangleID].getHitResult(r);
+            return triangle[(int)t[x].triangleID].getHitResult(r);
         }
         if(!t[x].AABBbox.testInsect(r)) return {};
         HitResult L = getBVHHitResult(t[x].ls, r),

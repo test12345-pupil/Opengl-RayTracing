@@ -8,6 +8,7 @@
 
 
 struct Shape{
+    int ___;// 前8字节是虚函数表，用int做12bytes对齐
     Material material;
     virtual HitResult getHitResult(Ray r) = 0;
 };

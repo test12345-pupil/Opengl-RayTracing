@@ -79,8 +79,8 @@ bool loadOBJ(const char * path, Scene *s, int sceneid, glm::fvec3 d, glm::fvec3 
 			for(int i=0; i<MAX_VERTEX_PER_POLYGON; ++i)vertex[i] = uv[i] = normal[i] = 1;
             int n = 0;
 			while(1){
-                int num = fscanf(file, "%d/%d/%d", &vertex[n], &uv[n], &normal[n]);
-                // int num = fscanf(file, "%d", &vertex[n]);
+                // int num = fscanf(file, "%d/%d/%d", &vertex[n], &uv[n], &normal[n]);
+                int num = fscanf(file, "%d", &vertex[n]);
                 if (num == 0){
                     printf("Parse failed 1\n");
                     fclose(file);

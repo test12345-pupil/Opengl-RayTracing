@@ -11,3 +11,4 @@ https://sketchfab.com/3d-models/aranara-genshin-impact-ad022912f9144aa18ff19a920
 GLSL主要参考：
 
 https://www.wangshaoxing.com/blog/2018-11-06-shader-lession-1.html
+https://geek-docs.com/vulkan/glsl/structs-and-arrays.html
