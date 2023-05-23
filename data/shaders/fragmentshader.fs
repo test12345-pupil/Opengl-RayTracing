@@ -10,6 +10,7 @@ uniform int u_width, u_height;
 uniform int u_clearScreen;
 uniform int u_nsamples;
 uniform vec3 u_campos, u_camdir, u_camaxisX, u_camaxisY;
+#define INF 1e18
 
 struct Material{ 
     vec3 Color; // 表面颜色
@@ -81,7 +82,7 @@ struct HitResult{
     Material material; // 命中点的材质
 };
 
-const HitResult InvalidHit = HitResult(-1, vec3(0), Material(vec3(0),vec3(0),0,0,0,0,0,0));
+const HitResult InvalidHit = HitResult(INF, vec3(0), Material(vec3(0),vec3(0),0,0,0,0,0,bool(0)));
 
 
 HitResult getHitResultRayTriangle(Ray r, Triangle t){
@@ -103,7 +104,7 @@ HitResult getHitResultRayTriangle(Ray r, Triangle t){
     return res;
 }
 
-bool testInsectAABBRay(AABB box, Ray r) {
+void testInsectAABBRay(out float t0, out float t1, AABB box, Ray r) {
     vec3 idir = vec3(1.0 / r.direction.x, 1.0 / r.direction.y, 1.0 / r.direction.z);
 
     vec3 _in = (box.d - r.start) * idir;
@@ -112,10 +113,8 @@ bool testInsectAABBRay(AABB box, Ray r) {
     vec3 tmax = max(_in, _out);
     vec3 tmin = min(_in, _out);
 
-    float t1 = min(tmax.x, min(tmax.y, tmax.z));
-    float t0 = max(tmin.x, max(tmin.y, tmin.z));
-
-    return t0 <= t1 && t1 >= 0;
+    t1 = min(tmax.x, min(tmax.y, tmax.z));
+    t0 = max(tmin.x, max(tmin.y, tmin.z));
 }
 
 int stack[256];
@@ -127,12 +126,20 @@ HitResult getBVHHitResult(int x, Ray r){
         BVHnode tx = getIthNode(stack[top]); --top;
         if(tx.triangleID >= 0){
             HitResult res = getHitResultRayTriangle(r, getIthTriangle(tx.triangleID));
-            if(res.dist >= 0 && (ans.dist < 0 || res.dist < ans.dist)){
+            if(res.dist < ans.dist){
                 ans = res;
             }
-        }else if(testInsectAABBRay(tx.AABBbox, r)){ 
-            stack[++top] = tx.ls;
-            stack[++top] = tx.rs;
+        }else{
+            float ls_t0, ls_t1, rs_t0, rs_t1;
+            testInsectAABBRay(ls_t0, ls_t1, getIthNode(stack[tx.ls]).AABBbox, r);
+            testInsectAABBRay(rs_t0, rs_t1, getIthNode(stack[tx.rs]).AABBbox, r);
+            if(ls_t0 < rs_t0){
+                if(rs_t1 >= 0 && rs_t0 <= rs_t1 && rs_t0 <= ans.dist) stack[++top] = tx.rs;
+                if(ls_t1 >= 0 && ls_t0 <= ls_t1 && ls_t0 <= ans.dist) stack[++top] = tx.ls;
+            }else{
+                if(ls_t1 >= 0 && ls_t0 <= ls_t1 && ls_t0 <= ans.dist) stack[++top] = tx.ls;
+                if(rs_t1 >= 0 && rs_t0 <= rs_t1 && rs_t0 <= ans.dist) stack[++top] = tx.rs;
+            }
         }
     }
     return ans;
@@ -174,7 +181,7 @@ vec3 RayTrace(Ray r){
     vec3 Col = vec3(1);
     for(int depth = 0; depth < 10; ++depth){
         HitResult result = getBVHHitResult(1, r);
-        if(result.dist < 0) return vec3(0);
+        if(result.dist == INF) return vec3(0);
         if(result.material.isLighter) return Col * result.material.Color;
         if(randf() < RAYTRACE_DIE_PROB) return vec3(0);
         float _r = randf(), C = abs(dot(-r.direction, result.material.normal)) / (1-RAYTRACE_DIE_PROB);
@@ -198,6 +205,5 @@ vec3 RayTrace(Ray r){
 void main(){
     // Pos.x, Pos.y \in [-1,1]
     Ray startRay = Ray(u_campos, normalize(u_camdir - u_camaxisY * Pos.x - u_camaxisX * Pos.y));
-
-    FragColor = vec4(1);//vec4(RayTrace(startRay), 1.0);
+    FragColor = vec4(RayTrace(startRay), 1.0);
 }

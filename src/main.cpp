@@ -14,6 +14,29 @@
 #include "objloader.h"
 #include "stb_image.h"
 
+void glCheckError_(const char *file, int line) // https://www.geeksforgeeks.org/error-handling-in-opengl/
+{
+    GLenum errorCode;
+    while ((errorCode = glGetError()) != GL_NO_ERROR)
+    {
+        std::string error;
+        switch (errorCode)
+        {
+            case GL_INVALID_ENUM:                  error = "INVALID_ENUM"; break;
+            case GL_INVALID_VALUE:                 error = "INVALID_VALUE"; break;
+            case GL_INVALID_OPERATION:             error = "INVALID_OPERATION"; break;
+            case GL_STACK_OVERFLOW:                error = "STACK_OVERFLOW"; break;
+            case GL_STACK_UNDERFLOW:               error = "STACK_UNDERFLOW"; break;
+            case GL_OUT_OF_MEMORY:                 error = "OUT_OF_MEMORY"; break;
+            case GL_INVALID_FRAMEBUFFER_OPERATION: error = "INVALID_FRAMEBUFFER_OPERATION"; break;
+        }
+        std::cout << error << " | " << file << " (" << line << ")" << std::endl;
+		exit(0);
+    }
+    return;
+}
+#define glCheckError() glCheckError_(__FILE__, __LINE__) 
+
 const int width = 512, height = 512;
 const float C = 25;
 glm::fvec3 screen[height][width];
@@ -255,7 +278,8 @@ int main(void) {
 			glActiveTexture(GL_TEXTURE0); 
 			glBindTexture(GL_TEXTURE_2D, textureNames[0]);
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-			glUniform1i(glGetUniformLocation(program, "imgTexture"), 0);
+			// glUniform1i(glGetUniformLocation(program, "imgTexture"), 0);
+			glCheckError();
 
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
@@ -276,16 +300,18 @@ int main(void) {
 		glActiveTexture(GL_TEXTURE1);
 		glBindBuffer(GL_TEXTURE_BUFFER, tbo[0]);
 		glBufferData(GL_TEXTURE_BUFFER, scene.BVH_id * sizeof(BVHnode), &scene.t[1], GL_STATIC_DRAW);
-		glUniform1i(glGetUniformLocation(program, "BVHnodes"), 1);
+		// glUniform1i(glGetUniformLocation(program, "BVHnodes"), 1);
 		glBindTexture(GL_TEXTURE_BUFFER, textureNames[1]);
 		glTexBuffer(GL_TEXTURE_BUFFER, GL_RGB32F, tbo[0]);
+		glCheckError();
 
 		glActiveTexture(GL_TEXTURE2);
 		glBindBuffer(GL_TEXTURE_BUFFER, tbo[1]);
 		glBufferData(GL_TEXTURE_BUFFER, scene.triangle_id * sizeof(Triangle), &scene.triangle[0], GL_STATIC_DRAW);
-		glUniform1i(glGetUniformLocation(program, "Triangles"), 2);
+		// glUniform1i(glGetUniformLocation(program, "Triangles"), 2);
 		glBindTexture(GL_TEXTURE_BUFFER, textureNames[2]);
 		glTexBuffer(GL_TEXTURE_BUFFER, GL_RGB32F, tbo[1]);
+		glCheckError();
 
 		// glActiveTexture(GL_TEXTURE3);
 		// glBindBuffer(GL_TEXTURE_BUFFER, tbo[2]);
@@ -298,12 +324,15 @@ int main(void) {
 	// == end bind texture/bufferTexture
 
 	puts("Start rendering loop...");
+	glCheckError();
 
 	const int SAMPLE_PER_FRAME = 1;
 
 	int k = 0;
 	
 	int nsamples = 0;
+
+	glUseProgram(program);
 
     while (!glfwWindowShouldClose(window)) {
         static float passed_time = 0, passed_time_last, delta_time;
@@ -325,11 +354,9 @@ int main(void) {
 		nsamples += SAMPLE_PER_FRAME;
 		glUniform1i(glGetUniformLocation(program, "u_nsamples"), nsamples);
 
+		glCheckError();
 		glClearColor (0.0, 0.0, 0.0, 0.0); 
 		glClear(GL_COLOR_BUFFER_BIT);
-
-		glUseProgram(program);
-
 		
 		glUniform1i(glGetUniformLocation(program, "u_size_BVHnode"), sizeof(BVHnode) / 12);
 		glUniform1i(glGetUniformLocation(program, "u_size_Triangle"), sizeof(Triangle) / 12);
@@ -344,21 +371,26 @@ int main(void) {
 		glUniform1i(glGetUniformLocation(program, "u_height"), height);
 		
 
+
 		for(int i=0; i<height; ++i){
 			for(int j=0; j<width; ++j){
-				glUniform2i(glGetUniformLocation(program, "u_position"), i, j);
 				glBindVertexArray(VAO);
+				glUniform2i(glGetUniformLocation(program, "u_position"), i, j);
 				glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+				glCheckError();
 			}
 		}
 		
-		glEnd();
+		glCheckError();
 		
         glfwSwapBuffers(window);
+		glCheckError();
 
         glfwPollEvents();
 
 		printf("FPS: %.10lf\n", 1 / delta_time);
+
+
     }
  
     glfwTerminate();
