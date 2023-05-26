@@ -4,13 +4,16 @@ layout (location = 0) out vec4 FragColor;
 layout (binding = 0) uniform sampler2D imgTexture;
 layout (binding = 1) uniform samplerBuffer BVHnodes;
 layout (binding = 2) uniform samplerBuffer Triangles;
-layout (binding = 3) uniform sampler2D lastFrame;
+layout (binding = 3) uniform sampler2D boundingBox;
+layout (binding = 4) uniform sampler2D lastFrame;
+uniform int u_nsamples;
 uniform int u_size_BVHnode;
 uniform int u_size_Triangle;
 uniform int u_width, u_height;
 uniform int u_lastColorWeight;
 uniform vec3 u_campos, u_camdir, u_camaxisX, u_camaxisY;
 #define INF 1e18
+#define PI 3.1415926538
 
 struct Material{ 
     vec3 Color; // 表面颜色
@@ -185,12 +188,20 @@ vec3 randomDirection(vec3 norm){
 }
 
 vec3 RayTrace(Ray r){
-    const float RAYTRACE_DIE_PROB = 0.5;
+    const float RAYTRACE_DIE_PROB = 0.2;
     vec3 Col = vec3(1);
     int depth;
-    for(depth = 0; depth < 5; ++depth){
+    for(depth = 0; depth < 100; ++depth){
         HitResult result = getBVHHitResult(r);
-        if(result.dist == INF) return vec3(0);
+        if(result.dist == INF){
+            float azimuth = atan(r.direction.z, r.direction.x);
+            float elevation = PI/2 - atan(length(vec2(r.direction.x, r.direction.z)), r.direction.y);
+
+            return Col * texture(boundingBox, vec2(
+                azimuth/(2*PI) + 0.5,
+                -elevation/(2*PI) + 0.5
+            )).rgb;
+        }
         if(result.material.isLighter) return Col * result.material.Color;
         if(randf() < RAYTRACE_DIE_PROB) return vec3(0);
         float _r = randf(), C = abs(dot(-r.direction, result.material.normal)) / (1-RAYTRACE_DIE_PROB);
@@ -212,12 +223,15 @@ vec3 RayTrace(Ray r){
 }
 
 void main(){
-    // Pos.x, Pos.y \in [-1,1]
-    vec2 Pos_ = vec2(Pos.x + randf(-1.0 / u_height, 1.0 / u_height), Pos.y + randf(-1.0 / u_width, 1.0 / u_width));
-    Ray startRay = Ray(u_campos, normalize(u_camdir - u_camaxisY * Pos_.x - u_camaxisX * Pos_.y));
-
     vec3 lastColor = texture(lastFrame, (Pos * 0.5 + vec2(0.5))).xyz;
+    vec3 thisColor = vec3(0);
+    for(int i=0; i<u_nsamples; ++i){
+        // Pos.x, Pos.y \in [-1,1]
+        vec2 Pos_ = vec2(Pos.x + randf(-1.0 / u_height, 1.0 / u_height), Pos.y + randf(-1.0 / u_width, 1.0 / u_width));
+        Ray startRay = Ray(u_campos, normalize(u_camdir - u_camaxisY * Pos_.x - u_camaxisX * Pos_.y));
 
-    FragColor = vec4(mix(lastColor, RayTrace(startRay), 1.0 / (1 + u_lastColorWeight)), 1.0);
-    // FragColor = mix(lastColor, vec4(RayTrace(startRay), 1.0), 1);
+        thisColor += RayTrace(startRay);
+    }
+
+    FragColor = vec4(mix(lastColor, thisColor / u_nsamples, 1.0 / (1 + u_lastColorWeight)), 1.0);
 }
