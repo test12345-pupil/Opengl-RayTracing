@@ -1,5 +1,7 @@
 #include "gl_env.h"
 
+// #define DEBUG
+
 #include <cmath>
 #include <cstring>
 #include <iostream>
@@ -10,9 +12,21 @@
 #include "randomtools.h"
 #include "triangle.h"
 #include "sphere.h"
+#include <wtypes.h>
 
 #include "objloader.h"
 #include "stb_image.h"
+#include "Shader.h"
+
+
+#ifdef DEBUG
+#define RENDERDOC
+#include "renderdoc_app.h"
+
+RENDERDOC_API_1_1_2 *rdoc_api = NULL;
+
+#endif
+
 
 void glCheckError_(const char *file, int line) // https://www.geeksforgeeks.org/error-handling-in-opengl/
 {
@@ -37,8 +51,7 @@ void glCheckError_(const char *file, int line) // https://www.geeksforgeeks.org/
 }
 #define glCheckError() glCheckError_(__FILE__, __LINE__) 
 
-const int width = 512, height = 512;
-const float C = 25;
+const int width = 1000, height = 1000;
 glm::fvec3 screen[height][width];
 // 按照width*height划分像素，与当前窗口大小无关
 
@@ -63,6 +76,18 @@ const glm::fvec3 COL_RED(1, 0.5, 0.5),
 
 
 int main(void) {
+	printf("%d\n",sizeof(glm::fmat3x2));
+	#ifdef RENDERDOC
+	// At init, on windows
+	if(HMODULE mod = GetModuleHandleA("renderdoc.dll"))
+	{
+		pRENDERDOC_GetAPI RENDERDOC_GetAPI =
+			(pRENDERDOC_GetAPI)GetProcAddress(mod, "RENDERDOC_GetAPI");
+		int ret = RENDERDOC_GetAPI(eRENDERDOC_API_Version_1_1_2, (void **)&rdoc_api);
+		assert(ret == 1);
+	}
+	#endif
+
 	// == begin 设置相机
 	scene.cam.setPosition(0,0,0.8);
 	scene.cam.setDirection(0,0.1,-1);
@@ -115,20 +140,19 @@ int main(void) {
 	
 
 	{
-		// bool success = loadOBJ("../../data/aranara.obj", &scene, 0, {-0.5, -0.5, -0.5}, {0.5, 0.5, 0.5});
+		bool success = loadOBJ("../../data/aranara.obj", &scene, 0, {-0.5, -0.5, -0.5}, {0.5, 0.5, 0.5});
 		
-		bool success = loadOBJ("../../data/bunny.obj", &scene, 0, {-0.5, -0.5, -0.5}, {0.5, 0.5, 0.5});
+		// bool success = loadOBJ("../../data/bunny.obj", &scene, 0, {-0.5, -0.5, -0.5}, {0.5, 0.5, 0.5});
 
 		assert(success);
 	}
 
 	scene.root = scene.buildBVH({});
 
+    if (!glfwInit()) return -1;
+
     GLFWwindow* window;
  
-    if (!glfwInit()) return -1;
- 
-
     window = glfwCreateWindow(width, height, "New window", NULL, NULL);
     if (!window) {
         glfwTerminate();
@@ -139,96 +163,12 @@ int main(void) {
  
     glfwMakeContextCurrent(window);
     glfwSwapInterval(0);
+    if (glewInit() != GLEW_OK) exit(EXIT_FAILURE);
 
 	
 	// == begin bind shader programs
-
-    GLuint vertex_shader, fragment_shader, program;
-
-    if (glewInit() != GLEW_OK)
-        exit(EXIT_FAILURE);
-
-		
-
-	auto _glShaderSource =[&] (GLuint shader, GLsizei count, const char* path, const GLint *length, std::function<std::string(std::string)> F = NULL){
-		std::string S="", s;
-		std::ifstream prog(path);
-		while(std::getline(prog, s)){ 
-			S += s + "\n";
-		}
-		if(F) S = F(S);
-		// std::cout<<S<<std::endl;
-		char *S_content = new char[S.size()+10];
-		memcpy(S_content, S.c_str(), S.size());
-		S_content[S.size()] = 0;
-		glShaderSource(shader, count, &S_content, length);
-		delete S_content;
-	};
-
-		
-    vertex_shader = glCreateShader(GL_VERTEX_SHADER);
-    _glShaderSource(vertex_shader, 1, "../../data/shaders/vertexshader.vs", NULL, [&](std::string s){
-		// std::string screen_size_placeholder = "/*{screen_size}*/";
-		// size_t pos_screen_size = s.find(screen_size_placeholder);
-		// assert(pos_screen_size != std::string::npos);
-		// s = s.replace(pos_screen_size, screen_size_placeholder.size(), std::to_string(width * height));
-		return s;
-	});
-    glCompileShader(vertex_shader);
-	GLint vsisCompiled = 0;
-	glGetShaderiv(vertex_shader, GL_COMPILE_STATUS, &vsisCompiled);
-	if(vsisCompiled == GL_FALSE)
-	{
-		GLint maxLength = 0;
-		glGetShaderiv(vertex_shader, GL_INFO_LOG_LENGTH, &maxLength);
-
-		// The maxLength includes the NULL character
-		std::vector<GLchar> errorLog(maxLength);
-		glGetShaderInfoLog(vertex_shader, maxLength, &maxLength, &errorLog[0]);
-
-		std::cout << "Error compiling vertex shader: " << &errorLog[0] << std::endl;
-		// Exit with failure.
-		glDeleteShader(vertex_shader); // Don't leak the shader.
-		exit(0);
-	}
-
-
-    fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
-    _glShaderSource(fragment_shader, 1, "../../data/shaders/fragmentshader.fs", NULL);
-    glCompileShader(fragment_shader);
-
-	GLint fsisCompiled = 0;
-	glGetShaderiv(fragment_shader, GL_COMPILE_STATUS, &fsisCompiled);
-	if(fsisCompiled == GL_FALSE)
-	{
-		GLint maxLength = 0;
-		glGetShaderiv(fragment_shader, GL_INFO_LOG_LENGTH, &maxLength);
-
-		// The maxLength includes the NULL character
-		std::vector<GLchar> errorLog(maxLength);
-		glGetShaderInfoLog(fragment_shader, maxLength, &maxLength, &errorLog[0]);
-
-		std::cout << "Error compiling fragment shader: " << &errorLog[0] << std::endl;
-		// Exit with failure.
-		glDeleteShader(fragment_shader); // Don't leak the shader.
-		exit(0);
-	}
-
-    program = glCreateProgram();
-    glAttachShader(program, vertex_shader);
-    glAttachShader(program, fragment_shader);
-    glLinkProgram(program);
-	
-    int linkStatus;
-    if (glGetProgramiv(program, GL_LINK_STATUS, &linkStatus), linkStatus == GL_FALSE){
-		GLint maxLength = 0;
-		glGetProgramiv(program, GL_INFO_LOG_LENGTH, &maxLength);
-		std::vector<GLchar> infoLog(maxLength);
-		glGetProgramInfoLog(program, maxLength, &maxLength, &infoLog[0]);
-
-        std::cout << "Error occured in glLinkProgram():" << &infoLog[0] << std::endl;
-		exit(0);
-	}
+	Shader program1("../../data/shaders/vertexshader2.vs", "../../data/shaders/fragmentshader.fs");
+	Shader program2("../../data/shaders/vertexshader2.vs", "../../data/shaders/fragmentshader2.fs");
 	// == end bind shader programs
 
 	// == begin bind VAO/VBO/EBO
@@ -263,23 +203,23 @@ int main(void) {
 
 	// == begin bind texture/bufferTexture
 
+	GLuint fbo, lastFrame;
+
 	{
 		
-		GLuint textureNames[4];
-		glGenTextures(4, textureNames);
+		GLuint textureNames[5];
+		glGenTextures(5, textureNames);
 
 		unsigned char* data;
-		int width, height, nrChannels;
-		data = stbi_load("../../data/aranara_image.png", &width, &height, &nrChannels, 0);
+		int width0, height0, nrChannels;
+		data = stbi_load("../../data/aranara_image.png", &width0, &height0, &nrChannels, 0);
 
 		if (data != NULL) {
 			assert(nrChannels == 4);
 
 			glActiveTexture(GL_TEXTURE0); 
 			glBindTexture(GL_TEXTURE_2D, textureNames[0]);
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-			// glUniform1i(glGetUniformLocation(program, "imgTexture"), 0);
-			glCheckError();
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width0, height0, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
@@ -294,103 +234,120 @@ int main(void) {
 		assert(sizeof(Triangle) % 12 == 0);
 
 		stbi_image_free(data);
-		GLuint tbo[3];
-		glGenBuffers(3, tbo);
+		GLuint tbo[2];
+		glGenBuffers(2, tbo);
 
 		glActiveTexture(GL_TEXTURE1);
 		glBindBuffer(GL_TEXTURE_BUFFER, tbo[0]);
 		glBufferData(GL_TEXTURE_BUFFER, scene.BVH_id * sizeof(BVHnode), &scene.t[1], GL_STATIC_DRAW);
-		// glUniform1i(glGetUniformLocation(program, "BVHnodes"), 1);
 		glBindTexture(GL_TEXTURE_BUFFER, textureNames[1]);
 		glTexBuffer(GL_TEXTURE_BUFFER, GL_RGB32F, tbo[0]);
-		glCheckError();
 
 		glActiveTexture(GL_TEXTURE2);
 		glBindBuffer(GL_TEXTURE_BUFFER, tbo[1]);
 		glBufferData(GL_TEXTURE_BUFFER, scene.triangle_id * sizeof(Triangle), &scene.triangle[0], GL_STATIC_DRAW);
-		// glUniform1i(glGetUniformLocation(program, "Triangles"), 2);
 		glBindTexture(GL_TEXTURE_BUFFER, textureNames[2]);
 		glTexBuffer(GL_TEXTURE_BUFFER, GL_RGB32F, tbo[1]);
-		glCheckError();
 
-		// glActiveTexture(GL_TEXTURE3);
-		// glBindBuffer(GL_TEXTURE_BUFFER, tbo[2]);
-		// glBufferData(GL_TEXTURE_BUFFER, width * height * 12, &screen, GL_DYNAMIC_DRAW);
-		// glUniform1i(glGetUniformLocation(program, "Screen"), 3);
-		// glBindTexture(GL_TEXTURE_BUFFER, textureNames[3]);
-		// glTexBuffer(GL_TEXTURE_BUFFER, GL_RGB32F, tbo[2]);
+		lastFrame = textureNames[3];
+		glGenFramebuffers(1, &fbo);
+		glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+		glBindTexture(GL_TEXTURE_2D, lastFrame);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, lastFrame, 0);
+		program2.use();
+		glActiveTexture(GL_TEXTURE4);
+		glBindTexture(GL_TEXTURE_2D, lastFrame);
+		program2.setInt("texPass4", lastFrame);
+
+		program1.use();
+		glActiveTexture(GL_TEXTURE3);
+		glBindTexture(GL_TEXTURE_2D, lastFrame);
+		program2.setInt("lastFrame", lastFrame);
+
+		GLuint attachments[] = {GL_COLOR_ATTACHMENT0};
+		glDrawBuffers(1, attachments);
+
 	}
+
+	program1.use();
+	program1.setInt("u_width", width);
+	program1.setInt("u_height", height);
+	program1.setInt("u_size_BVHnode", sizeof(BVHnode) / 12);
+	program1.setInt("u_size_Triangle", sizeof(Triangle) / 12);
+	program2.use();
+	program2.setInt("u_width", width);
+	program2.setInt("u_height", height);
 
 	// == end bind texture/bufferTexture
 
 	puts("Start rendering loop...");
-	glCheckError();
 
-	const int SAMPLE_PER_FRAME = 1;
-
-	int k = 0;
+	int frameCounter = 0;
 	
-	int nsamples = 0;
+	int lastColorWeight = 0;
+	
 
-	glUseProgram(program);
 
     while (!glfwWindowShouldClose(window)) {
+		#ifdef RENDERDOC
+		if(rdoc_api) rdoc_api->StartFrameCapture(NULL, NULL);
+		#endif
+		
+		// fbo/tex[1]: lastFrame; [0]: outputFrame
+
+		program1.use();
+
+		++frameCounter;
+
         static float passed_time = 0, passed_time_last, delta_time;
         passed_time_last = passed_time;
         passed_time = (float) glfwGetTime();
         delta_time = passed_time - passed_time_last;
 
+
 		glfwSetWindowSize(window, width, height);
-		int width , height;
 		
-		if(scene.handleCameraChange(window, delta_time, width, height)){
-			glUniform1i(glGetUniformLocation(program, "u_clearScreen"), 1);
-		}else{
-			glUniform1i(glGetUniformLocation(program, "u_clearScreen"), 0);
-		}
+		if(scene.handleCameraChange(window, delta_time, width, height)) lastColorWeight = 0;
+		else ++lastColorWeight;
 
-		++k;
+		program1.setInt("u_lastColorWeight", lastColorWeight);
+		program1.setUInt("frameCounter", frameCounter);
+		program1.setVec3("u_campos", scene.cam.getPos());
+		program1.setVec3("u_camdir", scene.cam.getDir());
+		glm::fvec3 _axisx = scene.cam.getAxisX() / scene.tg_alphaW;
+		glm::fvec3 _axisy = scene.cam.getAxisY() / scene.tg_alphaH;
+		program1.setVec3("u_camaxisX", _axisx);
+		program1.setVec3("u_camaxisY", _axisy);
 		
-		nsamples += SAMPLE_PER_FRAME;
-		glUniform1i(glGetUniformLocation(program, "u_nsamples"), nsamples);
+		glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 
-		glCheckError();
+		glBindVertexArray(VAO);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glClearColor (0.0, 0.0, 0.0, 0.0); 
 		glClear(GL_COLOR_BUFFER_BIT);
 		
-		glUniform1i(glGetUniformLocation(program, "u_size_BVHnode"), sizeof(BVHnode) / 12);
-		glUniform1i(glGetUniformLocation(program, "u_size_Triangle"), sizeof(Triangle) / 12);
+		program2.use();
 
-		glUniform3fv(glGetUniformLocation(program, "u_campos"), 1, (GLfloat *)&scene.cam.getPos());
-		glUniform3fv(glGetUniformLocation(program, "u_camdir"), 1, (GLfloat *)&scene.cam.getDir());
-		glm::fvec3 _axisx = scene.cam.getAxisX() / scene.tg_alphaW;
-		glUniform3fv(glGetUniformLocation(program, "u_camaxisX"), 1, (GLfloat *)&_axisx);
-		glm::fvec3 _axisy = scene.cam.getAxisY() / scene.tg_alphaH;
-		glUniform3fv(glGetUniformLocation(program, "u_camaxisY"), 1, (GLfloat *)&_axisy);
-		glUniform1i(glGetUniformLocation(program, "u_width"), width);
-		glUniform1i(glGetUniformLocation(program, "u_height"), height);
-		
+		glBindVertexArray(VAO);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
-
-		for(int i=0; i<height; ++i){
-			for(int j=0; j<width; ++j){
-				glBindVertexArray(VAO);
-				glUniform2i(glGetUniformLocation(program, "u_position"), i, j);
-				glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-				glCheckError();
-			}
-		}
-		
-		glCheckError();
-		
         glfwSwapBuffers(window);
-		glCheckError();
-
         glfwPollEvents();
 
-		printf("FPS: %.10lf\n", 1 / delta_time);
+		// printf("FPS: %.10lf\n", 1 / delta_time);
+		glGetError();
+		
 
-
+		#ifdef RENDERDOC
+		if(rdoc_api) rdoc_api->EndFrameCapture(NULL, NULL);
+		#endif
     }
  
     glfwTerminate();

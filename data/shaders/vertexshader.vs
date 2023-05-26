@@ -8,5 +8,3 @@ void main(){
     gl_Position = vec4(2.0*_pos.x/u_height - 1, 2.0*_pos.y/u_width - 1, 1.0, 1.0);
     Pos = vec2(2.0*_pos.x/u_height - 1, 2.0*_pos.y/u_width - 1);
 }
-
-

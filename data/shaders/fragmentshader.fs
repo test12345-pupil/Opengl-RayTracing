@@ -1,14 +1,14 @@
 #version 420 core
 in vec2 Pos;
-out vec4 FragColor;
+layout (location = 0) out vec4 FragColor;
 layout (binding = 0) uniform sampler2D imgTexture;
 layout (binding = 1) uniform samplerBuffer BVHnodes;
-uniform int u_size_BVHnode;
 layout (binding = 2) uniform samplerBuffer Triangles;
+layout (binding = 3) uniform sampler2D lastFrame;
+uniform int u_size_BVHnode;
 uniform int u_size_Triangle;
 uniform int u_width, u_height;
-uniform int u_clearScreen;
-uniform int u_nsamples;
+uniform int u_lastColorWeight;
 uniform vec3 u_campos, u_camdir, u_camaxisX, u_camaxisY;
 #define INF 1e18
 
@@ -40,6 +40,7 @@ struct Triangle{
     Material material;
     vec3 a,b,c;
     vec2 ta,tb,tc;
+    mat3x2 M;
 };
 
 BVHnode getIthNode(int index){
@@ -55,25 +56,32 @@ BVHnode getIthNode(int index){
     );
 }
 Triangle getIthTriangle(int index){
-    vec3 data0 = texelFetch(BVHnodes, index * u_size_BVHnode).xyz; // saves virtual table, dont use
-    vec3 data1 = texelFetch(BVHnodes, index * u_size_BVHnode + 1).xyz;
-    vec3 data2 = texelFetch(BVHnodes, index * u_size_BVHnode + 2).xyz;
-    vec3 data3 = texelFetch(BVHnodes, index * u_size_BVHnode + 3).xyz;
-    vec3 data4 = texelFetch(BVHnodes, index * u_size_BVHnode + 4).xyz;
-    vec3 data5 = texelFetch(BVHnodes, index * u_size_BVHnode + 5).xyz;
-    vec3 data6 = texelFetch(BVHnodes, index * u_size_BVHnode + 6).xyz;
-    vec3 data7 = texelFetch(BVHnodes, index * u_size_BVHnode + 7).xyz;
-    vec3 data8 = texelFetch(BVHnodes, index * u_size_BVHnode + 8).xyz;
-    vec3 data9 = texelFetch(BVHnodes, index * u_size_BVHnode + 9).xyz;
+    vec3 data0 = texelFetch(Triangles, index * u_size_Triangle).xyz; // saves virtual table, dont use
+    vec3 data1 = texelFetch(Triangles, index * u_size_Triangle + 1).xyz;
+    vec3 data2 = texelFetch(Triangles, index * u_size_Triangle + 2).xyz;
+    vec3 data3 = texelFetch(Triangles, index * u_size_Triangle + 3).xyz;
+    vec3 data4 = texelFetch(Triangles, index * u_size_Triangle + 4).xyz;
+    vec3 data5 = texelFetch(Triangles, index * u_size_Triangle + 5).xyz;
+    vec3 data6 = texelFetch(Triangles, index * u_size_Triangle + 6).xyz;
+    vec3 data7 = texelFetch(Triangles, index * u_size_Triangle + 7).xyz;
+    vec3 data8 = texelFetch(Triangles, index * u_size_Triangle + 8).xyz;
+    vec3 data9 = texelFetch(Triangles, index * u_size_Triangle + 9).xyz;
+    vec3 dataJ = texelFetch(Triangles, index * u_size_Triangle + 10).xyz;
+    vec3 dataQ = texelFetch(Triangles, index * u_size_Triangle + 11).xyz;
     return Triangle(
         Material(
             data1,data2,
             data3.x,data3.y,data3.z,
-            data4.x,data4.y,bool(floatBitsToInt(data4.z))),
+            data4.x,data4.y,data4.z == 1),
         data5,data6,data7,
         data8.xy,
         vec2(data8.z, data9.x),
-        data9.yz);
+        data9.yz,
+        mat3x2(
+            dataJ.xy,
+            vec2(dataJ.z,dataQ.x),
+            dataQ.yz
+        ));
 }
 
 struct HitResult{
@@ -99,7 +107,8 @@ HitResult getHitResultRayTriangle(Ray r, Triangle t){
     HitResult res = HitResult(d, X, t.material);
     res.material.normal = N;
     if(!isnan(t.ta.x)){
-        res.material.Color = 0.75f * (res.hitPoint + vec3(1)) ;
+        vec2 tc = t.M * X;
+        res.material.Color = texture(imgTexture, tc).rgb;
     }
     return res;
 }
@@ -113,14 +122,13 @@ void testInsectAABBRay(out float t0, out float t1, AABB box, Ray r) {
     vec3 tmax = max(_in, _out);
     vec3 tmin = min(_in, _out);
 
-    t1 = min(tmax.x, min(tmax.y, tmax.z));
     t0 = max(tmin.x, max(tmin.y, tmin.z));
+    t1 = min(tmax.x, min(tmax.y, tmax.z));
 }
 
-int stack[256];
-HitResult getBVHHitResult(int x, Ray r){
-    int top = 0;
-    stack[0] = x;
+HitResult getBVHHitResult(Ray r){
+    int stack[256], top = 0;
+    stack[0] = 1;
     HitResult ans = InvalidHit;
     while(top >= 0){
         BVHnode tx = getIthNode(stack[top]); --top;
@@ -131,8 +139,8 @@ HitResult getBVHHitResult(int x, Ray r){
             }
         }else{
             float ls_t0, ls_t1, rs_t0, rs_t1;
-            testInsectAABBRay(ls_t0, ls_t1, getIthNode(stack[tx.ls]).AABBbox, r);
-            testInsectAABBRay(rs_t0, rs_t1, getIthNode(stack[tx.rs]).AABBbox, r);
+            testInsectAABBRay(ls_t0, ls_t1, getIthNode(tx.ls).AABBbox, r);
+            testInsectAABBRay(rs_t0, rs_t1, getIthNode(tx.rs).AABBbox, r);
             if(ls_t0 < rs_t0){
                 if(rs_t1 >= 0 && rs_t0 <= rs_t1 && rs_t0 <= ans.dist) stack[++top] = tx.rs;
                 if(ls_t1 >= 0 && ls_t0 <= ls_t1 && ls_t0 <= ans.dist) stack[++top] = tx.ls;
@@ -177,10 +185,11 @@ vec3 randomDirection(vec3 norm){
 }
 
 vec3 RayTrace(Ray r){
-    const float RAYTRACE_DIE_PROB = 0.2;
+    const float RAYTRACE_DIE_PROB = 0.5;
     vec3 Col = vec3(1);
-    for(int depth = 0; depth < 10; ++depth){
-        HitResult result = getBVHHitResult(1, r);
+    int depth;
+    for(depth = 0; depth < 5; ++depth){
+        HitResult result = getBVHHitResult(r);
         if(result.dist == INF) return vec3(0);
         if(result.material.isLighter) return Col * result.material.Color;
         if(randf() < RAYTRACE_DIE_PROB) return vec3(0);
@@ -204,6 +213,11 @@ vec3 RayTrace(Ray r){
 
 void main(){
     // Pos.x, Pos.y \in [-1,1]
-    Ray startRay = Ray(u_campos, normalize(u_camdir - u_camaxisY * Pos.x - u_camaxisX * Pos.y));
-    FragColor = vec4(RayTrace(startRay), 1.0);
+    vec2 Pos_ = vec2(Pos.x + randf(-1.0 / u_height, 1.0 / u_height), Pos.y + randf(-1.0 / u_width, 1.0 / u_width));
+    Ray startRay = Ray(u_campos, normalize(u_camdir - u_camaxisY * Pos_.x - u_camaxisX * Pos_.y));
+
+    vec3 lastColor = texture(lastFrame, (Pos * 0.5 + vec2(0.5))).xyz;
+
+    FragColor = vec4(mix(lastColor, RayTrace(startRay), 1.0 / (1 + u_lastColorWeight)), 1.0);
+    // FragColor = mix(lastColor, vec4(RayTrace(startRay), 1.0), 1);
 }

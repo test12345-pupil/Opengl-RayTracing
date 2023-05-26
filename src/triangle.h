@@ -9,6 +9,7 @@ struct Triangle: public Shape{
     public:
     glm::fvec3 a,b,c;
     glm::fvec2 ta,tb,tc;
+    glm::fmat3x2 M;
     
     Triangle(){}
     Triangle(glm::fvec3 a, glm::fvec3 b, glm::fvec3 c, 
@@ -16,7 +17,11 @@ struct Triangle: public Shape{
         glm::fvec3 n, int tex):
         a(a), b(b), c(c), ta(ta), tb(tb), tc(tc){
         material.normal = glm::normalize(glm::cross(b - a, c - a));
-        // material.normal = n;
+        M = glm::fmat3x2(ta, tb, tc) * glm::inverse(glm::fmat3(a,b,c));
+        // std::cout<<glm::to_string(M*a-ta)<<std::endl;
+        // std::cout<<glm::to_string(M*b-tb)<<std::endl;
+        // std::cout<<glm::to_string(M*c-tc)<<std::endl;
+        // std::cout<<std::endl;
     }
     Triangle(glm::fvec3 a, glm::fvec3 b, glm::fvec3 c, 
         glm::fvec3 color):a(a), b(b), c(c){

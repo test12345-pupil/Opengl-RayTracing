@@ -42,8 +42,8 @@ bool loadOBJ(const char * path, Scene *s, int sceneid, glm::fvec3 d, glm::fvec3 
 			temp_vertices.push_back(vertex);
 		}else if ( strcmp( lineHeader, "vt" ) == 0 ){
 			glm::vec2 uv;
-			fscanf(file, "%f %f\n", &uv.x, &uv.y );
-			uv.y = -uv.y; // Invert V coordinate since we will only use DDS texture, which are inverted. Remove if you want to use TGA or BMP loaders.
+			fscanf(file, "%f %f %*f\n", &uv.x, &uv.y );
+			uv.y = 1-uv.y; // Invert V coordinate since we will only use DDS texture, which are inverted. Remove if you want to use TGA or BMP loaders.
 			temp_uvs.push_back(uv);
 		}else if ( strcmp( lineHeader, "vn" ) == 0 ){
 			glm::vec3 normal;
@@ -79,8 +79,8 @@ bool loadOBJ(const char * path, Scene *s, int sceneid, glm::fvec3 d, glm::fvec3 
 			for(int i=0; i<MAX_VERTEX_PER_POLYGON; ++i)vertex[i] = uv[i] = normal[i] = 1;
             int n = 0;
 			while(1){
-                // int num = fscanf(file, "%d/%d/%d", &vertex[n], &uv[n], &normal[n]);
-                int num = fscanf(file, "%d", &vertex[n]);
+                int num = fscanf(file, "%d/%d/%d", &vertex[n], &uv[n], &normal[n]);
+                // int num = fscanf(file, "%d", &vertex[n]);
                 if (num == 0){
                     printf("Parse failed 1\n");
                     fclose(file);
