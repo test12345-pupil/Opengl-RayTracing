@@ -55,6 +55,8 @@ const int width = 1000, height = 1000;
 glm::fvec3 screen[height][width];
 // 按照width*height划分像素，与当前窗口大小无关
 
+const int nsamples = 1;
+
 Scene scene;
 
 static void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods) {
@@ -76,7 +78,6 @@ const glm::fvec3 COL_RED(1, 0.5, 0.5),
 
 
 int main(void) {
-	printf("%d\n",sizeof(glm::fmat3x2));
 	#ifdef RENDERDOC
 	// At init, on windows
 	if(HMODULE mod = GetModuleHandleA("renderdoc.dll"))
@@ -102,38 +103,9 @@ int main(void) {
 	
 	// == begin 布置场景
 
-	// 光源
-	Triangle lamp1(glm::fvec3(0.3, 1-1e-5, 0.3), glm::fvec3(-0.3, 1-1e-5, 0.3), glm::fvec3(-0.3, 1-1e-5, -0.3), COL_WHITE);
-	lamp1.material.isLighter = 1;
-	scene.addShape(&lamp1);
-
-	Triangle lamp2(glm::fvec3(0.3, 1-1e-5, 0.3), glm::fvec3(-0.3, 1-1e-5, -0.3), glm::fvec3(0.3, 1-1e-5, -0.3), COL_WHITE);
-	lamp2.material.isLighter = 1;
-	scene.addShape(&lamp2);
-	
-	// 底部背景板
-	scene.addShape(new Triangle(glm::fvec3(1, -1, 1), glm::fvec3(-1, -1, -1), glm::fvec3(-1, -1, 1), COL_GRAY));
-	scene.addShape(new Triangle(glm::fvec3(1, -1, 1), glm::fvec3(1, -1, -1), glm::fvec3(-1, -1, -1), COL_GRAY));
-
-	// 顶部背景板
-	scene.addShape(new Triangle(glm::fvec3(1, 1, 1), glm::fvec3(-1, 1, 1), glm::fvec3(-1, 1, -1), COL_GRAY));
-	scene.addShape(new Triangle(glm::fvec3(1, 1, 1), glm::fvec3(-1, 1, -1), glm::fvec3(1, 1, -1), COL_GRAY));
-
-	// 前面背景板
-	scene.addShape(new Triangle(glm::fvec3(1, -1, -1), glm::fvec3(-1, 1, -1), glm::fvec3(-1, -1, -1), COL_GRAY));
-	scene.addShape(new Triangle(glm::fvec3(1, -1, -1), glm::fvec3(1, 1, -1), glm::fvec3(-1, 1, -1), COL_GRAY));
-
-	// 左边背景板
-	scene.addShape(new Triangle(glm::fvec3(-1, -1, -1), glm::fvec3(-1, 1, 1), glm::fvec3(-1, -1, 1), COL_GRAY));
-	scene.addShape(new Triangle(glm::fvec3(-1, -1, -1), glm::fvec3(-1, 1, -1), glm::fvec3(-1, 1, 1), COL_GRAY));
-
-	// 右边背景板
-	scene.addShape(new Triangle(glm::fvec3(1, 1, 1), glm::fvec3(1, -1, -1), glm::fvec3(1, -1, 1), COL_GRAY));
-	scene.addShape(new Triangle(glm::fvec3(1, -1, -1), glm::fvec3(1, 1, 1), glm::fvec3(1, 1, -1), COL_GRAY));
-
-	// 后面背景板
-	scene.addShape(new Triangle(glm::fvec3(1, -1, 1), glm::fvec3(-1, 1, 1), glm::fvec3(-1, -1, 1), COL_GRAY));
-	scene.addShape(new Triangle(glm::fvec3(1, -1, 1), glm::fvec3(1, 1, 1), glm::fvec3(-1, 1, 1), COL_GRAY));
+	// 巨大地板
+	scene.addShape(new Triangle(glm::fvec3(1e9, -1, 1e9), glm::fvec3(-1e9, -1, -1e9), glm::fvec3(-1e9, -1, 1e9), COL_GREEN));
+	scene.addShape(new Triangle(glm::fvec3(1e9, -1, 1e9), glm::fvec3(1e9, -1, -1e9), glm::fvec3(-1e9, -1, -1e9), COL_GREEN));
 
 	// == end 布置场景
 
@@ -211,15 +183,15 @@ int main(void) {
 		glGenTextures(5, textureNames);
 
 		unsigned char* data;
-		int width0, height0, nrChannels;
-		data = stbi_load("../../data/aranara_image.png", &width0, &height0, &nrChannels, 0);
 
+		int width_, height_, nrChannels;
+		data = stbi_load("../../data/aranara_image.png", &width_, &height_, &nrChannels, 0);
 		if (data != NULL) {
 			assert(nrChannels == 4);
 
 			glActiveTexture(GL_TEXTURE0); 
 			glBindTexture(GL_TEXTURE_2D, textureNames[0]);
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width0, height0, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width_, height_, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
@@ -229,11 +201,11 @@ int main(void) {
 		else {
 			std::cout << "Failed to load texture" << std::endl;
 		}
+		stbi_image_free(data);
 
 		assert(sizeof(BVHnode) % 12 == 0);
 		assert(sizeof(Triangle) % 12 == 0);
 
-		stbi_image_free(data);
 		GLuint tbo[2];
 		glGenBuffers(2, tbo);
 
@@ -249,7 +221,25 @@ int main(void) {
 		glBindTexture(GL_TEXTURE_BUFFER, textureNames[2]);
 		glTexBuffer(GL_TEXTURE_BUFFER, GL_RGB32F, tbo[1]);
 
-		lastFrame = textureNames[3];
+		data = stbi_load("../../data/syferfontein_18d_clear_puresky_4k_32bit.png", &width_, &height_, &nrChannels, 0);
+		if (data != NULL) {
+			assert(nrChannels == 4);
+			glActiveTexture(GL_TEXTURE3); 
+			glBindTexture(GL_TEXTURE_2D, textureNames[3]);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width_, height_, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		}
+		else {
+			std::cout << "Failed to load texture" << std::endl;
+		}
+		stbi_image_free(data);
+
+		lastFrame = textureNames[4];
+		glActiveTexture(GL_TEXTURE4); 
 		glGenFramebuffers(1, &fbo);
 		glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 		glBindTexture(GL_TEXTURE_2D, lastFrame);
@@ -259,14 +249,14 @@ int main(void) {
 
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, lastFrame, 0);
 		program2.use();
-		glActiveTexture(GL_TEXTURE4);
+		glActiveTexture(GL_TEXTURE5);
 		glBindTexture(GL_TEXTURE_2D, lastFrame);
-		program2.setInt("texPass4", lastFrame);
+		program2.setInt("texPass5", lastFrame);
 
 		program1.use();
-		glActiveTexture(GL_TEXTURE3);
+		glActiveTexture(GL_TEXTURE4);
 		glBindTexture(GL_TEXTURE_2D, lastFrame);
-		program2.setInt("lastFrame", lastFrame);
+		program1.setInt("lastFrame", lastFrame);
 
 		GLuint attachments[] = {GL_COLOR_ATTACHMENT0};
 		glDrawBuffers(1, attachments);
@@ -274,6 +264,7 @@ int main(void) {
 	}
 
 	program1.use();
+	program1.setInt("u_nsamples", nsamples);
 	program1.setInt("u_width", width);
 	program1.setInt("u_height", height);
 	program1.setInt("u_size_BVHnode", sizeof(BVHnode) / 12);

@@ -4,6 +4,7 @@
 
 #include "gl_env.h"
 #include <iostream>
+#include <algorithm>
 #include <vector>
 #include <string>
 #ifndef M_PI
@@ -66,12 +67,19 @@ struct Camera{
          */
         glm::fvec3 axis = getAxisY();
         
-        glm::quat tmp = glm::cross(glm::angleAxis(dy, axis), glm::angleAxis(dx, up));
-        tmp = glm::normalize(tmp);
+        float elevation = M_PI/2 - atan2(glm::length(glm::vec2(direction.x, direction.z)), direction.y);
+        //最上:pi/2；最下：-pi/2
+        
+        dy = std::min<float>(M_PI/2 * 0.8 - elevation, dy);
+        dy = std::max<float>(-M_PI/2 * 0.8 - elevation, dy);
 
-        direction = glm::rotate(tmp, direction);
+        if(fabs(dx) + fabs(dy) > 1e-8){
+            direction = glm::angleAxis(dx, up) *
+                glm::angleAxis(dy, axis) *
+                direction;
 
-        axis_available = false;
+            axis_available = false;
+        }
     }
     void handle_eye(float d_fb, float d_lr, float d_ud){ 
         /**
