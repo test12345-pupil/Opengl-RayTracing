@@ -104,8 +104,8 @@ int main(void) {
 	// == begin 布置场景
 
 	// 巨大地板
-	scene.addShape(new Triangle(glm::fvec3(1e9, -1, 1e9), glm::fvec3(-1e9, -1, -1e9), glm::fvec3(-1e9, -1, 1e9), COL_GREEN));
-	scene.addShape(new Triangle(glm::fvec3(1e9, -1, 1e9), glm::fvec3(1e9, -1, -1e9), glm::fvec3(-1e9, -1, -1e9), COL_GREEN));
+	//scene.addShape(new Triangle(glm::fvec3(1e9, -1, 1e9), glm::fvec3(-1e9, -1, -1e9), glm::fvec3(-1e9, -1, 1e9), COL_GREEN));
+	//scene.addShape(new Triangle(glm::fvec3(1e9, -1, 1e9), glm::fvec3(1e9, -1, -1e9), glm::fvec3(-1e9, -1, -1e9), COL_GREEN));
 
 	// == end 布置场景
 
@@ -221,12 +221,12 @@ int main(void) {
 		glBindTexture(GL_TEXTURE_BUFFER, textureNames[2]);
 		glTexBuffer(GL_TEXTURE_BUFFER, GL_RGB32F, tbo[1]);
 
-		data = stbi_load("../../data/syferfontein_18d_clear_puresky_4k_32bit.png", &width_, &height_, &nrChannels, 0);
+		data = stbi_load("../../data/golf_course_sunrise_4k.hdr", &width_, &height_, &nrChannels, 0);
 		if (data != NULL) {
-			assert(nrChannels == 4);
+			//assert(nrChannels == 4);
 			glActiveTexture(GL_TEXTURE3); 
 			glBindTexture(GL_TEXTURE_2D, textureNames[3]);
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width_, height_, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width_, height_, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
@@ -280,8 +280,6 @@ int main(void) {
 	int frameCounter = 0;
 	
 	int lastColorWeight = 0;
-	
-
 
     while (!glfwWindowShouldClose(window)) {
 		#ifdef RENDERDOC
