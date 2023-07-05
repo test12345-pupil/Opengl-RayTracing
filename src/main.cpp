@@ -106,20 +106,20 @@ int main(void) {
 	// == begin 布置场景
 
 	// 巨大地板
-	//scene.addShape(new Triangle(glm::fvec3(1e9, -1, 1e9), glm::fvec3(-1e9, -1, -1e9), glm::fvec3(-1e9, -1, 1e9), COL_GREEN));
-	//scene.addShape(new Triangle(glm::fvec3(1e9, -1, 1e9), glm::fvec3(1e9, -1, -1e9), glm::fvec3(-1e9, -1, -1e9), COL_GREEN));
+	scene.addShape(new Triangle(glm::fvec3(0.5, -0.5, 0.5), glm::fvec3(-0.5, -0.5, -0.5), glm::fvec3(-0.5, -0.5, 0.5), COL_GREEN));
+	scene.addShape(new Triangle(glm::fvec3(0.5, -0.5, 0.5), glm::fvec3(0.5, -0.5, -0.5), glm::fvec3(-0.5, -0.5, -0.5), COL_GREEN));
 
 	// == end 布置场景
 
 	
 
 	{
-		bool success1 = loadOBJ("../../data/hall01.obj", &scene, 1, {-0.5, -0.5, -0.5}, {0.5, 0.5, 0.5});
-		bool success2 = loadOBJ("../../data/aranara.obj", &scene, 7, {-0.25, -0.25, -0.25}, {0.25, 0.25, 0.25});
+		bool success1 = loadOBJ("../../data/hall01.obj", &scene, 0, {-0.5, -0.5, -0.5}, {0.5, 0.5, 0.5});
+		assert(success1);
+		// bool success2 = loadOBJ("../../data/aranara.obj", &scene, 7, {-0.25, -0.25, -0.25}, {0.25, 0.25, 0.25});
+		// assert(success2);
 		// bool success = loadOBJ("../../data/bunny.obj", &scene, 0, {-0.5, -0.5, -0.5}, {0.5, 0.5, 0.5});
 
-		assert(success1);
-		assert(success2);
 	}
 
 	scene.root = scene.buildBVH({});
@@ -207,21 +207,21 @@ int main(void) {
 		stbi_image_free(data);
 
 		
-		data = stbi_load("../../data/aranara_image.png", &width_, &height_, &nrChannels, 0);
-		if (data != NULL) {
-			glActiveTexture(GL_TEXTURE7); 
-			glBindTexture(GL_TEXTURE_2D, textureNames[7]);
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width_, height_, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		// data = stbi_load("../../data/aranara_image.png", &width_, &height_, &nrChannels, 0);
+		// if (data != NULL) {
+		// 	glActiveTexture(GL_TEXTURE7); 
+		// 	glBindTexture(GL_TEXTURE_2D, textureNames[7]);
+		// 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width_, height_, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		}
-		else {
-			std::cout << "Failed to load texture" << std::endl;
-		}
-		stbi_image_free(data);
+		// 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+		// 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+		// 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		// 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		// }
+		// else {
+		// 	std::cout << "Failed to load texture" << std::endl;
+		// }
+		// stbi_image_free(data);
 
 		GLuint tbo[2];
 		glGenBuffers(2, tbo);
