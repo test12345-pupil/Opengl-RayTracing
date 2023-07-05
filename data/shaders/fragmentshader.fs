@@ -105,7 +105,7 @@ struct HitResult{
 const HitResult InvalidHit = HitResult(INF, vec3(0), Material(vec3(0),vec3(0),0,0,0,0,0,bool(0)));
 
 vec3 getTexture(int ID, vec2 c){
-    if(ID==1)return texture(imgTexture, c).rgb;
+    if(ID==0)return texture(imgTexture, c).rgb;
     else if(ID==7)return texture(texture7, c).rgb;
     else return vec3(0);
 }
@@ -123,10 +123,10 @@ HitResult getHitResultRayTriangle(Ray r, Triangle t){
     float d = distance(X, r.start);
     HitResult res = HitResult(d, X, t.material);
     res.material.normal = N;
-    if(t.textureID >= 0 ){
+    if(t.textureID >= 0){
         vec2 tc = t.M * X;
         res.material.Color = getTexture(t.textureID, tc);
-    }
+    }else res.material.Color = vec3(0);
     return res;
 }
 
