@@ -21,7 +21,7 @@ void main() {
     
     sum /= (2*D+1)*(2*D+1);
 
-    const float gamma = 2.2;
+    const float gamma = 5;
 
     vec3 mapped = vec3(1.0) - exp(-sum.xyz * exposure);
     mapped = pow(mapped, vec3(1.0 / gamma));

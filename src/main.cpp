@@ -16,7 +16,7 @@
 
 #include "objloader.h"
 #include "stb_image.h"
-#include "Shader.h"
+#include "shader.h"
 
 
 #ifdef DEBUG
@@ -57,7 +57,7 @@ glm::fvec3 screen[height][width];
 
 const int nsamples = 1;
 
-Scene scene;
+Scene scene,model;
 
 static void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods) {
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
@@ -112,14 +112,16 @@ int main(void) {
 	
 
 	{
-		bool success = loadOBJ("../../data/aranara.obj", &scene, 0, {-0.5, -0.5, -0.5}, {0.5, 0.5, 0.5});
-		
+		bool success1 = loadOBJ("../../data/hall01.obj", &scene, 0, {-0.5, -0.5, -0.5}, {0.5, 0.5, 0.5});
+		bool success2 = loadOBJ("../../data/aranara.obj", &model, 1, {-0.5, -0.5, -0.5}, {0.5, 0.5, 0.5});
 		// bool success = loadOBJ("../../data/bunny.obj", &scene, 0, {-0.5, -0.5, -0.5}, {0.5, 0.5, 0.5});
 
-		assert(success);
+		assert(success1);
+		assert(success2);
 	}
 
 	scene.root = scene.buildBVH({});
+	model.root = model.buildBVH({});
 
     if (!glfwInit()) return -1;
 
@@ -185,13 +187,13 @@ int main(void) {
 		unsigned char* data;
 
 		int width_, height_, nrChannels;
-		data = stbi_load("../../data/aranara_image.png", &width_, &height_, &nrChannels, 0);
+		data = stbi_load("../../data/material_diffuse.jpg", &width_, &height_, &nrChannels, 0);
 		if (data != NULL) {
-			assert(nrChannels == 4);
+			//assert(nrChannels == 4);
 
 			glActiveTexture(GL_TEXTURE0); 
 			glBindTexture(GL_TEXTURE_2D, textureNames[0]);
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width_, height_, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width_, height_, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);

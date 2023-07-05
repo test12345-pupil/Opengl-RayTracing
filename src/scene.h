@@ -10,7 +10,7 @@
 #include "BVHnode.h"
 #include "triangle.h"
 
-const int BVH_TREE_SIZE = 20000;
+const int BVH_TREE_SIZE = 200000;
 
 struct Scene{
     BVHnode t[BVH_TREE_SIZE];
