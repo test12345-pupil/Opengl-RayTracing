@@ -11,8 +11,8 @@ layout (binding = 3) uniform sampler2D texPass3;
 layout (binding = 4) uniform sampler2D texPass4;
 layout (binding = 5) uniform sampler2D texPass5;
 layout (binding = 6) uniform sampler2D texPass6;
-const float exposure = 1;
-const int D = 5;
+const float exposure = 0.8;
+const int D = 3;
 void main() {
     vec4 sum = vec4(0);
     for(int i = -D; i <= D; ++i)
@@ -21,7 +21,7 @@ void main() {
     
     sum /= (2*D+1)*(2*D+1);
 
-    const float gamma = 5;
+    const float gamma = 4;
 
     vec3 mapped = vec3(1.0) - exp(-sum.xyz * exposure);
     mapped = pow(mapped, vec3(1.0 / gamma));

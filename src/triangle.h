@@ -23,10 +23,6 @@ struct Triangle: public Shape{
         a(a), b(b), c(c), ta(ta), tb(tb), tc(tc){
         material.normal = glm::normalize(glm::cross(b - a, c - a));
         M = glm::fmat3x2(ta, tb, tc) * glm::inverse(glm::fmat3(a,b,c));
-        // std::cout<<glm::to_string(M*a-ta)<<std::endl;
-        // std::cout<<glm::to_string(M*b-tb)<<std::endl;
-        // std::cout<<glm::to_string(M*c-tc)<<std::endl;
-        // std::cout<<std::endl;
         textureID = tex;
         isLighter = 0;
     }

@@ -202,7 +202,7 @@ vec3 randomDirection(vec3 norm){
 }
 
 vec3 RayTrace(Ray r){
-    const float RAYTRACE_DIE_PROB = 0.2;
+    const float RAYTRACE_DIE_PROB = 0.7;
     vec3 Col = vec3(1);
     int depth;
     for(depth = 0; depth < 100; ++depth){
@@ -222,11 +222,10 @@ vec3 RayTrace(Ray r){
         vec3 dir = randomDirection(result.material.normal);
         if(_r < result.material.reflectRate){ // 镜面反射
             r = Ray(result.hitPoint, 
-                mix(reflect(-1.0f * r.direction, result.material.normal) , dir, result.material.reflectRough));
-            Col *= C;
+                mix(reflect(1.0f * r.direction, result.material.normal) , dir, result.material.reflectRough));
         }else if(_r < result.material.reflectRate + result.material.refractRate){ // 折射
             r = Ray(result.hitPoint, 
-                mix(refract(-1.0f * r.direction, result.material.normal, result.material.refractRate) , dir, result.material.reflectRough));
+                mix(refract(1.0f * r.direction, result.material.normal, result.material.refractRate) , dir, result.material.refractRough));
             Col *= C;
         }else{ // 漫反射
             r = Ray(result.hitPoint, dir);
