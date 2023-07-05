@@ -57,7 +57,7 @@ glm::fvec3 screen[height][width];
 
 const int nsamples = 1;
 
-Scene scene,model;
+Scene scene;
 
 static void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods) {
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
@@ -88,6 +88,8 @@ int main(void) {
 		assert(ret == 1);
 	}
 	#endif
+	assert((int)sizeof(BVHnode) % 12 == 0);
+	assert((int)sizeof(Triangle) % 12 == 0);
 
 	// == begin 设置相机
 	scene.cam.setPosition(0,0,0.8);
@@ -112,8 +114,8 @@ int main(void) {
 	
 
 	{
-		bool success1 = loadOBJ("../../data/hall01.obj", &scene, 0, {-0.5, -0.5, -0.5}, {0.5, 0.5, 0.5});
-		bool success2 = loadOBJ("../../data/aranara.obj", &model, 1, {-0.5, -0.5, -0.5}, {0.5, 0.5, 0.5});
+		bool success1 = loadOBJ("../../data/hall01.obj", &scene, 1, {-0.5, -0.5, -0.5}, {0.5, 0.5, 0.5});
+		bool success2 = loadOBJ("../../data/aranara.obj", &scene, 7, {-0.25, -0.25, -0.25}, {0.25, 0.25, 0.25});
 		// bool success = loadOBJ("../../data/bunny.obj", &scene, 0, {-0.5, -0.5, -0.5}, {0.5, 0.5, 0.5});
 
 		assert(success1);
@@ -121,7 +123,6 @@ int main(void) {
 	}
 
 	scene.root = scene.buildBVH({});
-	model.root = model.buildBVH({});
 
     if (!glfwInit()) return -1;
 
@@ -181,8 +182,8 @@ int main(void) {
 
 	{
 		
-		GLuint textureNames[5];
-		glGenTextures(5, textureNames);
+		GLuint textureNames[8];
+		glGenTextures(8, textureNames);
 
 		unsigned char* data;
 
@@ -205,8 +206,22 @@ int main(void) {
 		}
 		stbi_image_free(data);
 
-		assert(sizeof(BVHnode) % 12 == 0);
-		assert(sizeof(Triangle) % 12 == 0);
+		
+		data = stbi_load("../../data/aranara_image.png", &width_, &height_, &nrChannels, 0);
+		if (data != NULL) {
+			glActiveTexture(GL_TEXTURE7); 
+			glBindTexture(GL_TEXTURE_2D, textureNames[7]);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width_, height_, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		}
+		else {
+			std::cout << "Failed to load texture" << std::endl;
+		}
+		stbi_image_free(data);
 
 		GLuint tbo[2];
 		glGenBuffers(2, tbo);

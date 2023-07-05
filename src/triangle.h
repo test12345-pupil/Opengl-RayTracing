@@ -10,6 +10,11 @@ struct Triangle: public Shape{
     glm::fvec3 a,b,c;
     glm::fvec2 ta,tb,tc;
     glm::fmat3x2 M;
+    int textureID;
+    int isLighter;
+    int unused2;
+    int unused3;
+    int unused4;
     
     Triangle(){}
     Triangle(glm::fvec3 a, glm::fvec3 b, glm::fvec3 c, 
@@ -22,12 +27,15 @@ struct Triangle: public Shape{
         // std::cout<<glm::to_string(M*b-tb)<<std::endl;
         // std::cout<<glm::to_string(M*c-tc)<<std::endl;
         // std::cout<<std::endl;
+        textureID = tex;
+        isLighter = 0;
     }
     Triangle(glm::fvec3 a, glm::fvec3 b, glm::fvec3 c, 
         glm::fvec3 color):a(a), b(b), c(c){
         material.normal = glm::normalize(glm::cross(b - a, c - a));
         material.Color = color;
-        ta.x = NAN;
+        textureID = -1;
+        isLighter = 0;
     }
     HitResult getHitResult(Ray r){
         glm::fvec3 D = r.direction, N = material.normal;

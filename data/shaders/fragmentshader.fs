@@ -6,6 +6,9 @@ layout (binding = 1) uniform samplerBuffer BVHnodes;
 layout (binding = 2) uniform samplerBuffer Triangles;
 layout (binding = 3) uniform sampler2D boundingBox;
 layout (binding = 4) uniform sampler2D lastFrame;
+layout (binding = 5) uniform sampler2D texture5;
+layout (binding = 6) uniform sampler2D texture6;
+layout (binding = 7) uniform sampler2D texture7;
 uniform int u_nsamples;
 uniform int u_size_BVHnode;
 uniform int u_size_Triangle;
@@ -44,6 +47,8 @@ struct Triangle{
     vec3 a,b,c;
     vec2 ta,tb,tc;
     mat3x2 M;
+    int textureID;
+    int isLighter;
 };
 
 BVHnode getIthNode(int index){
@@ -71,6 +76,8 @@ Triangle getIthTriangle(int index){
     vec3 data9 = texelFetch(Triangles, index * u_size_Triangle + 9).xyz;
     vec3 dataJ = texelFetch(Triangles, index * u_size_Triangle + 10).xyz;
     vec3 dataQ = texelFetch(Triangles, index * u_size_Triangle + 11).xyz;
+    vec3 dataK = texelFetch(Triangles, index * u_size_Triangle + 12).xyz;
+    vec3 dataL = texelFetch(Triangles, index * u_size_Triangle + 13).xyz;
     return Triangle(
         Material(
             data1,data2,
@@ -84,7 +91,9 @@ Triangle getIthTriangle(int index){
             dataJ.xy,
             vec2(dataJ.z,dataQ.x),
             dataQ.yz
-        ));
+        ),
+        floatBitsToInt(dataK.x),
+        floatBitsToInt(dataK.y));
 }
 
 struct HitResult{
@@ -95,6 +104,11 @@ struct HitResult{
 
 const HitResult InvalidHit = HitResult(INF, vec3(0), Material(vec3(0),vec3(0),0,0,0,0,0,bool(0)));
 
+vec3 getTexture(int ID, vec2 c){
+    if(ID==1)return texture(imgTexture, c).rgb;
+    else if(ID==7)return texture(texture7, c).rgb;
+    else return vec3(0);
+}
 
 HitResult getHitResultRayTriangle(Ray r, Triangle t){
     vec3 D = r.direction, N = t.material.normal;
@@ -109,9 +123,9 @@ HitResult getHitResultRayTriangle(Ray r, Triangle t){
     float d = distance(X, r.start);
     HitResult res = HitResult(d, X, t.material);
     res.material.normal = N;
-    if(!isnan(t.ta.x)){
+    if(t.textureID >= 0 ){
         vec2 tc = t.M * X;
-        res.material.Color = texture(imgTexture, tc).rgb;
+        res.material.Color = getTexture(t.textureID, tc);
     }
     return res;
 }
