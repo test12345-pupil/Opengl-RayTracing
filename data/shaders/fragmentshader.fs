@@ -223,6 +223,7 @@ vec3 RayTrace(Ray r){
         if(_r < result.material.reflectRate){ // 镜面反射
             r = Ray(result.hitPoint, 
                 mix(reflect(1.0f * r.direction, result.material.normal) , dir, result.material.reflectRough));
+            Col *= C;
         }else if(_r < result.material.reflectRate + result.material.refractRate){ // 折射
             r = Ray(result.hitPoint, 
                 mix(refract(1.0f * r.direction, result.material.normal, result.material.refractRate) , dir, result.material.refractRough));
