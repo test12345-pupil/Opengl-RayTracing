@@ -102,24 +102,11 @@ int main(void) {
 
 	// == end 设置相机
 
-	
-	// == begin 布置场景
-
-	// 巨大地板
-	// scene.addShape(new Triangle(glm::fvec3(1, -1, 1), glm::fvec3(-1, -1, -1), glm::fvec3(-1, -1, 1), COL_GREEN));
-	// scene.addShape(new Triangle(glm::fvec3(1, -1, 1), glm::fvec3(1, -1, -1), glm::fvec3(-1, -1, -1), COL_GREEN));
-
-	// == end 布置场景
-
-	
-
 	{
 		bool success1 = loadOBJ("../../data/hall01.obj", &scene, 0, {-1, -1, -1}, {1, 1, 1}, {1,1,1});
 		assert(success1);
 		bool success2 = loadOBJ("../../data/aranara.obj", &scene, 7, {-0.5, -0.4, -0.75}, {0.5, 0, -0.25}, {1,1,-1});
 		assert(success2);
-		// bool success = loadOBJ("../../data/bunny.obj", &scene, 0, {-0.5, -0.5, -0.5}, {0.5, 0.5, 0.5});
-
 	}
 
 	scene.root = scene.buildBVH({});
